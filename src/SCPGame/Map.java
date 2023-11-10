@@ -167,6 +167,7 @@ public class Map {
                 String monsterName = scan.next();
                 int monsterHP = Integer.valueOf(scan.next());
                 int monsterDmg = Integer.valueOf(scan.next());
+                int threshold = Integer.parseInt(scan.next());
                 String line = scan.nextLine();
                 monsterList.add(new Monster(initRoomID,monsterID,monsterName,monsterHP,monsterDmg));
             }
