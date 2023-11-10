@@ -91,6 +91,17 @@ public class Player {
             checkVisited();
         }
     }
+    //Revive player to Spawn Room
+    public void revivePlayer() {
+        if (playerHP <= 0) {
+            System.out.println("You have been revived at the spawn room.");
+            setPlayerHP(100);  // Reset player's HP to the maximum value
+            setCurrentRoom(getSpawnRoom());  // Move the player to the spawn room
+            displayLocation();  // Display the information about the spawn room
+        } else {
+            System.out.println("You are not dead. No need to revive.");
+        }
+    }
     
     //Action happens after player enter a room
     public void enterRoom(){
