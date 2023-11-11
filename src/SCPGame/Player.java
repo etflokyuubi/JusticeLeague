@@ -108,6 +108,73 @@ public class Player {
         displayLocation();
     }
     
+    public void inspectMonster() {
+        if (currentRoom.getMonster() != null) {
+            Monster monster = currentRoom.getMonster();
+            System.out.println("You inspect the monster in the room:");
+            System.out.println("Monster ID: " + monster.getMonsterID());
+            System.out.println("Monster Name: " + monster.getMonsterName());
+            System.out.println("Monster Description: " + monster.getMonsterDescription());
+            System.out.println("Monster HP: " + monster.getMonsterHP());
+            System.out.println("Monster Attack: " + monster.getMonsterAttack());
+        } else {
+            System.out.println("There's no monster to inspect in this room.");
+        }
+    }
+
+
+ public void fightMonster() {
+        if (currentRoom.getMonster() != null) {
+            Monster monster = currentRoom.getMonster();
+            System.out.println("You engage in a battle with the monster!");
+            
+           
+            int playerAttack =0;
+            
+            // Player attacks the monster
+            monster.takeDamage(playerAttack);
+            
+            // Check if the monster is defeated
+            if (monster.isDefeated()) {
+                System.out.println("You have defeated the monster!");
+                currentRoom.setMonster(null);  // Remove the defeated monster from the room
+            } else {
+                // Monster counterattacks
+                int monsterAttack = monster.getMonsterAttack();
+                takeDamage(monsterAttack);
+                
+                // Check if the player is defeated
+                if (playerHP <= 0) {
+                    System.out.println("You have been defeated by the monster.");
+                    revivePlayer();  // Revive the player at the spawn room
+                }
+            }
+        } else {
+            System.out.println("There's no monster to fight in this room.");
+        }
+    }
+ 
+ public void weaponList() {
+	    System.out.println("Your list of weapons:");
+
+	    boolean foundWeapons = false;
+
+	    for (Item item : inventory) {
+	        if (item instanceof Weapon) {
+	            Weapon weapon = (Weapon) item;
+	            System.out.println("Weapon ID: " + weapon.getItemID());
+	            System.out.println("Weapon Name: " + weapon.getItemName());
+	            System.out.println("Attack Value: " + weapon.getAtkValue());
+	            System.out.println("--------------------------");
+	            foundWeapons = true;
+	        }
+	    }
+
+	    if (!foundWeapons) {
+	        System.out.println("You don't have any weapons in your inventory.");
+	    }
+	}
+    
     //Print player's current room information including RoomID, RoomName and RoomDescription
     public void displayLocation(){
         System.out.println("\n---------------");
