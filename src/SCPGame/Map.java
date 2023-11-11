@@ -9,6 +9,7 @@ public class Map {
     ArrayList<Item> itemList = new ArrayList<>();
     ArrayList<Puzzle> puzzleList = new ArrayList<>();
     ArrayList<Monster> monsterList = new ArrayList<>();
+    ArrayList<Item> combineItem = new ArrayList<>();
     
     public Map() {
         loadRoom();
@@ -17,8 +18,6 @@ public class Map {
         //System.out.println(myMap);
 
         loadItem();
-//        loadEquipment();
-//        loadConsumable();
         
         //Place items into rooms
         for (Item i : itemList) {
@@ -45,6 +44,10 @@ public class Map {
         System.out.println("Finish adding Monster");
         //Uncomment the next line to see all monsters' info
         //System.out.println(monsterList);
+        
+        loadCombineItem();
+        //Uncomment the next line to see combine items' info
+        //System.out.println(combineItem);
     }
 
     //Load all rooms
@@ -73,7 +76,7 @@ public class Map {
         }
     }
 
-    //Loading Item information from Item.txt
+    //Loading Combine Item information from CombineItem.txt
     public void loadItem(){
         try {
             Scanner scan = new Scanner(new File("Item.txt"));
@@ -85,7 +88,7 @@ public class Map {
                 String itemType = scan.nextLine();
                 String itemDescription = scan.nextLine();
                 
-                // check for consumable/equip
+                //Check for consumable/weapon
                 if(itemType.equalsIgnoreCase("Consumable")) {
                 	int hpValue = Integer.parseInt(scan.nextLine());
                 	line = scan.nextLine();
@@ -99,6 +102,26 @@ public class Map {
                 	line = scan.nextLine();
                 	itemList.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
                 }
+            }
+            scan.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    
+    //Loading Item information from Item.txt
+    public void loadCombineItem(){
+        try {
+            Scanner scan = new Scanner(new File("CombineItem.txt"));
+            while (scan.hasNext()) {
+            	int initRoomID = scan.nextInt();
+            	String line = scan.nextLine();
+                String itemID = scan.nextLine();
+                String itemName = scan.nextLine();
+                String itemType = scan.nextLine();
+                String itemDescription = scan.nextLine();
+                line = scan.nextLine();
+                combineItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
             }
             scan.close();
         } catch (FileNotFoundException e){
@@ -158,7 +181,9 @@ public class Map {
 
     public int getNumberOfRooms(){return myMap.size();} //total rooms
 
-    @Override
+    public ArrayList<Item> getCombineItem() { return combineItem; }
+
+	@Override
     public String toString() {
         return "Map{" +
                 "MyMap=" + myMap +

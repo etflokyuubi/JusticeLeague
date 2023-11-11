@@ -56,6 +56,9 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("help")){
 	                player1.displayHelpMenu();
 	            }
+	            else if (playerInput.equalsIgnoreCase("combine")){
+	                player1.combineItem();
+	            }
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }
