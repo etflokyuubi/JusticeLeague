@@ -70,6 +70,8 @@ public class Room {
 	public void setPuzzle(Puzzle puzzle) { this.puzzle = puzzle; }
 
 	public void setMonster(Monster monster) { this.monster = monster; }
+	
+	public void addItem(Item i) { this.roomItems.add(i); }
 
 	@Override
 	public String toString() {
@@ -77,6 +79,8 @@ public class Room {
 				+ ", northRoom=" + northRoom + ", eastRoom=" + eastRoom + ", southRoom=" + southRoom + ", westRoom="
 				+ westRoom + "]\n";
 	}
+
+
 	
 	
 	

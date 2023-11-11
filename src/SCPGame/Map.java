@@ -9,36 +9,38 @@ public class Map {
     ArrayList<Item> itemList = new ArrayList<>();
     ArrayList<Puzzle> puzzleList = new ArrayList<>();
     ArrayList<Monster> monsterList = new ArrayList<>();
+    
     public Map() {
         loadRoom();
         System.out.println("Finish loading Room");
-        //Uncomment this line to see all rooms' info
+        //Uncomment the next line to see all rooms' info
         //System.out.println(myMap);
 
         loadItem();
 //        loadEquipment();
 //        loadConsumable();
-//        for (Item i : itemList) {
-//            myMap.get(i.getInitRoomID() - 1).addItem(i);
-//        }
+        for (Item i : itemList) {
+            myMap.get(i.getInitRoomID() - 1).addItem(i);
+        }
 //        System.out.println("Finish adding Item");
-        //Uncomment this line to see all items' info
+        //Uncomment the next line to see all items' info
         //System.out.println(itemList);
 //
         loadPuzzle();
-//        for (Puzzle p : puzzleList) {
-//            myMap.get(p.getInitRoomID() - 1).setPuzzle(p);
-//        }
+        for (Puzzle p : puzzleList) {
+            myMap.get(p.getInitRoomID() - 1).setPuzzle(p);
+        }
 //        System.out.println("Finish adding Puzzle");
         //Uncomment this line to see all puzzles' info
         //System.out.println(puzzleList);
 //
-//        loadMonster();
-//        for (Monster m : monsterList) {
-//            myMap.get(m.getInitRoomID() - 1).setMonster(m);
-//        }
+        loadMonster();
+        for (Monster m : monsterList) {
+            myMap.get(m.getInitRoomID() - 1).setMonster(m);
+        }
 //        System.out.println("Finish adding Monster");
-//        //System.out.println(monsterList);
+        //Uncomment the next line to see all monsters' info
+        //System.out.println(monsterList);
     }
 
     //Load all rooms
@@ -153,32 +155,27 @@ public class Map {
             e.printStackTrace();
         }
     }
-//
-//    //Loading Puzzle information from Monster.txt
-//    public void loadMonster(){
-//        try {
-//            Scanner scan = new Scanner(new File("Monster.txt"));
-//            while(scan.hasNext()){
-//                int monsterID = scan.nextInt();
-//                String temp = scan.nextLine();
-//                int initRoomID = scan.nextInt();
-//                temp = scan.nextLine();
-//                String name = scan.nextLine();
-//                String description = scan.nextLine();
-//                int atkDmg = scan.nextInt();
-//                temp = scan.nextLine();
-//                int monsterHp = scan.nextInt();
-//                temp = scan.nextLine();
-//                int threshold = scan.nextInt();
-//                temp = scan.nextLine();
-//                int range = scan.nextInt();
-//                monsterList.add(new Monster(monsterID,initRoomID,name,description,atkDmg,monsterHp,threshold,range));
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//    }
+
+    //Loading Monster information from Monster.txt
+    public void loadMonster(){
+        try {
+            Scanner scan = new Scanner(new File("Monster.txt"));
+            scan.useDelimiter("~");
+            while(scan.hasNext()){
+            	int initRoomID = scan.nextInt();
+                String monsterID = scan.next();
+                String monsterName = scan.next();
+                int monsterHP = Integer.valueOf(scan.next());
+                int monsterDmg = Integer.valueOf(scan.next());
+                int threshold = Integer.parseInt(scan.next());
+                String line = scan.nextLine();
+                monsterList.add(new Monster(initRoomID,monsterID,monsterName,monsterHP,monsterDmg));
+            }
+            scan.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 
     public Room getRoom(int roomID){return myMap.get(roomID-1);} //roomID starts at 1
 
