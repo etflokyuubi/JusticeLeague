@@ -11,7 +11,6 @@ public class Player {
 	
 	private ArrayList<Item> inventory = new ArrayList<>();
 	private ArrayList<Item> equipped = new ArrayList<>();
-	private ArrayList<Puzzle> puzzleRoom = new ArrayList<>();
 	
 	//Constructor
 	public Player(String playerName, Map gameMap) {
@@ -248,6 +247,7 @@ public class Player {
     				inventory.add(item);
     				System.out.println();
     				System.out.println("You've pickup up " + item.getItemName() + " and placed it in your inventory.");
+    				Collections.sort(inventory);
     				itemfound = true;
     				break;
     			}
@@ -283,7 +283,7 @@ public class Player {
     	
     	Scanner input = new Scanner(System.in);
     	
-    	if (  currentRoom.getPuzzle()!= null) {
+    	if (currentRoom.getPuzzle()!= null) {
     		System.out.println("Hey you have a puzzle to solve!");
     		int numAttempts = currentRoom.getPuzzle().getAttempts();
     		while (numAttempts > 0 ) {
@@ -291,19 +291,20 @@ public class Player {
     			String answer = input.nextLine();
     			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
     				System.out.println("You solved the puzzle!");
+    				currentRoom.setPuzzle(null);
     				break;
     			}
     			else {
     				numAttempts--;
-    				this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg() );
-    				System.out.println("You answered incorrectly. You took damage.");
+    				if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
+    					this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
+    					System.out.println("You answered incorrectly. You took damage.");
+    				}
     				
     			}
     		}
     		if (numAttempts == 0) {
     			System.out.println("You failed the puzzle.");
-    			
-    			
     		}
     	}
     }
@@ -317,7 +318,7 @@ public class Player {
     		Item item = findItem(itemID);
     		if(item!=null) {
     				System.out.println("\n" + item.getItemID() + ": " + item.getItemName());
-    				System.out.println(item.getItemDescription()+ "\n");
+    				System.out.println(item.getItemDescription());
     		}
     		else {
     			System.out.println("\nYou don't have this item.");

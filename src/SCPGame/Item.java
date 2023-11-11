@@ -1,6 +1,6 @@
 package SCPGame;
 
-public class Item {
+public class Item implements Comparable <Item>{
 	private int initRoomID;
 	private String itemID;
 	private String itemName;
@@ -27,6 +27,15 @@ public class Item {
 	public String getItemType() { return itemType; }
 
 	public String getItemDescription() { return itemDescription; }
+	
+	 @Override
+	    public int compareTo(Item o) {
+	        if (Integer.parseInt(itemID.substring(1)) < Integer.parseInt(o.itemID.substring(1)))
+	            return -1;
+	        else if (Integer.parseInt(itemID.substring(1)) > Integer.parseInt(o.itemID.substring(1)))
+	            return 1;
+	        else return 0;
+	    }
 
 	@Override
 	public String toString() {

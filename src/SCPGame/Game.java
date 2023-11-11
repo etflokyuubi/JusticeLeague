@@ -60,6 +60,9 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("help")){
 	                player1.displayHelpMenu();
 	            }
+	            else if (playerInput.equalsIgnoreCase("location")){
+	                player1.displayLocation();
+	            }
 	            else if (playerInput.equalsIgnoreCase("weapon")){
 	                player1.weaponList();
 	            }
