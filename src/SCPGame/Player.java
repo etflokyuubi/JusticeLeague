@@ -11,6 +11,7 @@ public class Player {
 	
 	private ArrayList<Item> inventory = new ArrayList<>();
 	private ArrayList<Item> equipped = new ArrayList<>();
+	private ArrayList<Puzzle> puzzleRoom = new ArrayList<>();
 	
 	//Constructor
 	public Player(String playerName, Map gameMap) {
@@ -106,6 +107,7 @@ public class Player {
     //Action happens after player enter a room
     public void enterRoom(){
         displayLocation();
+        playPuzzle();
     }
     
     //Print player's current room information including RoomID, RoomName and RoomDescription
@@ -219,5 +221,36 @@ public class Player {
 			System.out.println("");
     	}
     }
-
+    
+    public void playPuzzle () {
+    	
+    	Scanner input = new Scanner(System.in);
+    	
+    	if (  currentRoom.getPuzzle()!= null) {
+    		System.out.println("Hey you have a puzzle to solve!");
+    		int numAttempts = currentRoom.getPuzzle().getAttempts();
+    		while (numAttempts > 0 ) {
+    			System.out.println(currentRoom.getPuzzle().getQuestion());
+    			String answer = input.nextLine();
+    			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
+    				System.out.println("You solved the puzzle!");
+    				break;
+    			}
+    			else {
+    				numAttempts--;
+    				this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg() );
+    				System.out.println("You answered incorrectly. You took damage.");
+    				
+    			}
+    		}
+    		if (numAttempts == 0) {
+    			System.out.println("You failed the puzzle.");
+    			
+    			
+    		}
+    	}
+    }
 }
+    
+
+
