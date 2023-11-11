@@ -80,55 +80,23 @@ public class Map {
                 String itemName = scan.nextLine();
                 String itemType = scan.nextLine();
                 String itemDescription = scan.nextLine();
-                line = scan.nextLine();
-                itemList.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
+                
+                // check for consumable/equip
+                if(itemType.equalsIgnoreCase("Consumable")) {
+                	int hpValue = Integer.parseInt(scan.nextLine());
+                	line = scan.nextLine();
+                	itemList.add(new Consumable(initRoomID, itemID, itemName, itemType, itemDescription, hpValue));
+                } else {
+                	line = scan.nextLine();
+                	itemList.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
+                }
             }
             scan.close();
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
     }
-//
-//    //Loading Equipment information from Equipment.txt
-//    public void loadEquipment(){
-//        try {
-//            Scanner scan = new Scanner(new File("Equipment.txt"));
-//            scan.useDelimiter(",");
-//            while(scan.hasNext()){
-//                int itemID = scan.nextInt();
-//                int initRoomID = scan.nextInt();
-//                int atkValue = scan.nextInt();
-//                String itemName = scan.next();
-//                String itemDescription = scan.nextLine();
-//                itemDescription = itemDescription.substring(1,itemDescription.length());
-//                itemList.add(new Equipment(initRoomID,itemID,itemName,itemDescription,atkValue));
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    //Loading Consumable item information from Consumable.txt
-//    public void loadConsumable(){
-//        try {
-//            Scanner scan = new Scanner(new File("Consumable.txt"));
-//            scan.useDelimiter(",");
-//            while(scan.hasNext()){
-//                int itemID = scan.nextInt();
-//                int initRoomID = scan.nextInt();
-//                int hpValue = scan.nextInt();
-//                String itemName = scan.next();
-//                String itemDescription = scan.nextLine();
-//                itemDescription = itemDescription.substring(1,itemDescription.length());
-//                itemList.add(new Consumable(initRoomID,itemID,itemName,itemDescription,hpValue));
-//            }
-//            scan.close();
-//        } catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//    }
-//
+
     //Loading Puzzle information from Puzzle.txt
     public void loadPuzzle(){
         try {
@@ -169,7 +137,7 @@ public class Map {
                 int monsterDmg = Integer.valueOf(scan.next());
                 int threshold = Integer.parseInt(scan.next());
                 String line = scan.nextLine();
-                monsterList.add(new Monster(initRoomID,monsterID,monsterName,monsterHP,monsterDmg));
+                monsterList.add(new Monster(initRoomID,monsterID,monsterName,monsterHP,monsterDmg, threshold));
             }
             scan.close();
         } catch (FileNotFoundException e){

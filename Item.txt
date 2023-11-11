@@ -87,4 +87,32 @@ A19
 Level 4 Clearance Card
 Key Item
 An SCP Foundation security clearance card assigned to senior administration that requires access to site-wide and/or regional intelligence as well as long-term strategic data regarding Foundation operations and research projects. Level 4 security clearances are typically only held by Site Directors, Security Directors, or Mobile Task Force Commanders.
+
+11
+A21
+Medical Kit
+Consumable
+A basic item that allows the user to heal 80 health points.
+80
+
+17
+A21
+Medical Kit
+Consumable
+A basic item that allows the user to heal 80 health points.
+80
+
+17
+A21
+Medical Kit
+Consumable
+A basic item that allows the user to heal 80 health points.
+80
+
+17
+A22
+Adrenaline Shot
+Consumable
+A basic item that allows the user to heal 30 health points.
+30
 ---END---
