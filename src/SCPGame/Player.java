@@ -138,7 +138,7 @@ public class Player {
         System.out.println("-------------------------------------\n");
     }
     
-    // Print items found in the current room
+    //Print items found in the current room
     public void explore() {
     	if (currentRoom.getRoomItems().isEmpty()) {
     		System.out.println("\nNothing but this weird room here.\n");
@@ -152,7 +152,7 @@ public class Player {
     	}
     }
 
-    // Show non-equipped items currently in inventory
+    //Show non-equipped items currently in inventory
     public void showInventory() {
     	if(inventory.isEmpty()) {
     		System.out.println("\nYou have nothing in your inventory right now.\n");
@@ -166,6 +166,7 @@ public class Player {
     	}
     }
 
+    //Pickup an item in a room
     public void pickUp(String itemID) {
     	if(currentRoom.getRoomItems().isEmpty()) {
     		System.out.println("\nThere's nothing here to pick up.");
@@ -189,6 +190,7 @@ public class Player {
     	}
     }
     
+    //Drop an item from an inventory, put item into the room
     public void dropItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to drop.");
@@ -200,6 +202,24 @@ public class Player {
     				currentRoom.getRoomItems().add(item);
     				System.out.println();
     				System.out.println("You've dropped " + item.getItemName() + " on the floor.");
+    		}
+    		else {
+    			System.out.println("\nYou don't have this item.");
+    		}
+			System.out.println();
+    	}
+    }
+    
+    //Inspect item
+    public void inspectItem(String itemID) {
+    	if(inventory.isEmpty()) {
+    		System.out.println("\nThere's nothing to inspect.");
+    	}
+    	else {
+    		Item item = findItem(itemID);
+    		if(item!=null) {
+    				System.out.println("\n" + item.getItemID() + ": " + item.getItemName());
+    				System.out.println(item.getItemDescription()+ "\n");
     		}
     		else {
     			System.out.println("\nYou don't have this item.");
@@ -267,6 +287,10 @@ public class Player {
     		System.out.println("\nYou don't have any items to combine.\n");
     	}
     		
+    }
+    
+    public void equipItem(String itemID) {
+    	
     }
 
 }
