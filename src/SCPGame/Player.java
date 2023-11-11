@@ -139,5 +139,8 @@ public class Player {
     }
 
 
+    public void explore() {
+    	
+    }
 
 }
