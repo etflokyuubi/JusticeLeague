@@ -137,10 +137,86 @@ public class Player {
         System.out.printf("| %2s %8s %-10s %10s \n", "help","","Help menu","|");
         System.out.println("-------------------------------------\n");
     }
-
-
+    
+    // Print items found in the current room
     public void explore() {
-    	
+    	if (currentRoom.getRoomItems().isEmpty()) {
+    		System.out.println("");
+    		System.out.println("Nothing but this weird room here.");
+    		System.out.println("");
+    	}
+    	else {
+    		System.out.println("");
+    		for(Item item : currentRoom.getRoomItems()) {
+    			System.out.println("----------------------------\n" + item.getItemID() + ": " + item.getItemName());
+    		}
+    		System.out.println("----------------------------");
+    		System.out.println("");
+    	}
+    }
+
+    // Show non-equipped items currently in inventory
+    public void showInventory() {
+    	if(inventory.isEmpty()) {
+    		System.out.println("You have nothing in your inventory right now.");
+    		System.out.println("");
+    	}
+    	else {
+    		for(Item item : inventory) {
+    			System.out.println("----------------------------\n" + item.getItemID() + ": " + item.getItemName());
+    		}
+    		System.out.println("----------------------------\n");
+    	}
+    }
+
+    public void pickUp(String itemID) {
+    	if(currentRoom.getRoomItems().isEmpty()) {
+    		System.out.println("");
+    		System.out.println("There's nothing here to pick up.");
+    	}
+    	else {
+    		boolean itemfound = false;
+    		for(Item item : currentRoom.getRoomItems()) {
+    			if(item.getItemID().equals(itemID)) {
+    				currentRoom.getRoomItems().remove(item);
+    				inventory.add(item);
+    				System.out.println("");
+    				System.out.println("You've pickup up " + item.getItemName() + " and placed it in your inventory.");
+    				itemfound = true;
+    				break;
+    			}
+    		}
+    		if(!itemfound) {
+    			System.out.println("");
+    			System.out.println("This item does not exist here.");
+    		}
+			System.out.println("");
+    	}
+    }
+    
+    public void dropItem(String itemID) {
+    	if(inventory.isEmpty()) {
+    		System.out.println("");
+    		System.out.println("There's nothing to drop.");
+    	}
+    	else {
+    		boolean itemfound = false;
+    		for(Item item : inventory) {
+    			if(item.getItemID().equals(itemID)) {
+    				inventory.remove(item);
+    				currentRoom.getRoomItems().add(item);
+    				System.out.println("");
+    				System.out.println("You've dropped " + item.getItemName() + " on the floor.");
+    				itemfound = true;
+    				break;
+    			}
+    		}
+    		if(!itemfound) {
+    			System.out.println("");
+    			System.out.println("You don't have this item.");
+    		}
+			System.out.println("");
+    	}
     }
 
 }

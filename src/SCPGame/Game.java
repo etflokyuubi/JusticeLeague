@@ -39,14 +39,22 @@ public class Game {
 	                player1.moveWest();
 	                player1.enterRoom();
 	            }
-<<<<<<< HEAD
 	            else if (playerInput.equalsIgnoreCase("help")){
 	                player1.displayCommand();
-=======
+	            }
 	            else if (playerInput.equalsIgnoreCase("explore")){
-	                player1.moveWest();
-	                player1.enterRoom();
->>>>>>> 160aa98966a3a5e9d72cdcfb49ca18ee68464b06
+	                player1.explore();
+	            }
+	            else if (playerInput.equalsIgnoreCase("inventory")){
+	                player1.showInventory();
+	            }
+	            else if (playerInput.contains("pickup")){
+	            	String itemId = playerInput.substring(7, playerInput.length());
+	                player1.pickUp(itemId);
+	            }
+	            else if (playerInput.contains("drop")){
+	            	String itemId = playerInput.substring(5, playerInput.length());
+	                player1.dropItem(itemId);
 	            }
 	            else{
 	                System.out.println("Please enter correct command.");
