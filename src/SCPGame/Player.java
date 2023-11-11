@@ -114,9 +114,8 @@ public class Player {
             System.out.println("You inspect the monster in the room:");
             System.out.println("Monster ID: " + monster.getMonsterID());
             System.out.println("Monster Name: " + monster.getMonsterName());
-            System.out.println("Monster Description: " + monster.getMonsterDescription());
             System.out.println("Monster HP: " + monster.getMonsterHP());
-            System.out.println("Monster Attack: " + monster.getMonsterAttack());
+            System.out.println("Monster Attack: " + monster.getMonsterDmg());
         } else {
             System.out.println("There's no monster to inspect in this room.");
         }
@@ -135,13 +134,13 @@ public class Player {
             monster.takeDamage(playerAttack);
             
             // Check if the monster is defeated
-            if (monster.isDefeated()) {
+            if (monster.isDead()) {
                 System.out.println("You have defeated the monster!");
                 currentRoom.setMonster(null);  // Remove the defeated monster from the room
             } else {
                 // Monster counterattacks
-                int monsterAttack = monster.getMonsterAttack();
-                takeDamage(monsterAttack);
+                int monsterAttack = monster.getMonsterDmg();
+                monster.takeDamage(monsterAttack);
                 
                 // Check if the player is defeated
                 if (playerHP <= 0) {
