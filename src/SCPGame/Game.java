@@ -53,8 +53,15 @@ public class Game {
 	            	String itemId = playerInput.substring(5, playerInput.length());
 	                player1.dropItem(itemId);
 	            }
+	            else if (playerInput.contains("inspect")){
+	            	String itemId = playerInput.substring(8, playerInput.length());
+	                player1.inspectItem(itemId);
+	            }
 	            else if (playerInput.equalsIgnoreCase("help")){
 	                player1.displayHelpMenu();
+	            }
+	            else if (playerInput.equalsIgnoreCase("combine")){
+	                player1.combineItem();
 	            }
 	            else{
 	                System.out.println("Please enter correct command.");
