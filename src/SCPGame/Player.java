@@ -36,7 +36,6 @@ public class Player {
 	
 	public ArrayList<Item> getEquipped() { return equipped; }
 
-
 	//Setter
 	public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
 
@@ -104,6 +103,30 @@ public class Player {
         System.out.println(currentRoom.getRoomDescription());
         System.out.println("---------------\n");
     }
+    
+    public void displayCommand(){
+        System.out.println("\n--------------HELP MENU--------------");
+        System.out.printf("| %2s %5s %-10s %10s \n", "n/north", "", "Move North","|");
+        System.out.printf("| %2s %6s %-10s %10s \n", "e/east","","Move East","|");
+        System.out.printf("| %2s %5s %-13s %7s \n", "s/south","", "Move South","|");
+        System.out.printf("| %2s %6s %-13s %7s \n", "w/west","","Move West","|");
+        System.out.printf("| %2s %5s %-13s %6s \n", "explore","","Explore a room","|");
+        System.out.printf("| %2s %3s %-10s %5s \n", "inventory","", "Check inventory","|");
+        System.out.printf("| %2s %6s %-10s %8s \n", "pickup","","Pick up item","|");
+        System.out.printf("| %2s %8s %-10s %10s \n", "drop","","Drop item","|");
+        System.out.printf("| %2s %5s %-13s %7s \n", "inspect","","Inspect item","|");
+        System.out.printf("| %2s %7s %-13s %7s \n", "equip","","Equip item","|");
+        System.out.printf("| %2s %5s %-13s %7s \n", "unequip","","Unequip item","|");
+        System.out.printf("| %2s %9s %-10s %10s \n", "use","","Use item","|");
+        System.out.printf("| %2s %6s %-10s %5s \n", "attack","","Fight a monster","|");
+        System.out.printf("| %2s %6s %-10s %4s \n", "ignore","","Ignore a monster","|");
+        System.out.printf("| %2s %4s %-10s %6s \n", "location","","Check location","|");
+        System.out.printf("| %2s %7s %-10s %6s \n", "stats","","Check HP & ATK","|");
+        System.out.printf("| %2s %9s %-10s %7s \n", "map","","Check the map","|");
+        System.out.printf("| %2s %8s %-10s %10s \n", "help","","Help menu","|");
+        System.out.println("-------------------------------------\n");
+    }
+
 
 
 }

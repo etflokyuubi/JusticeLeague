@@ -19,26 +19,30 @@ public class Map {
         loadItem();
 //        loadEquipment();
 //        loadConsumable();
+        
+        //Place items into rooms
         for (Item i : itemList) {
             myMap.get(i.getInitRoomID() - 1).addItem(i);
         }
-//        System.out.println("Finish adding Item");
+        System.out.println("Finish adding Item");
         //Uncomment the next line to see all items' info
         //System.out.println(itemList);
-//
+
         loadPuzzle();
+        //Place puzzles into rooms
         for (Puzzle p : puzzleList) {
             myMap.get(p.getInitRoomID() - 1).setPuzzle(p);
         }
-//        System.out.println("Finish adding Puzzle");
+        System.out.println("Finish adding Puzzle");
         //Uncomment this line to see all puzzles' info
         //System.out.println(puzzleList);
-//
+
         loadMonster();
+        //Place monsters into rooms
         for (Monster m : monsterList) {
             myMap.get(m.getInitRoomID() - 1).setMonster(m);
         }
-//        System.out.println("Finish adding Monster");
+        System.out.println("Finish adding Monster");
         //Uncomment the next line to see all monsters' info
         //System.out.println(monsterList);
     }
