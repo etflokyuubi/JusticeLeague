@@ -90,6 +90,7 @@ public class Player {
             checkVisited();
         }
     }
+    
     //Revive player to Spawn Room
     public void revivePlayer() {
         if (playerHP <= 0) {
@@ -115,7 +116,7 @@ public class Player {
         System.out.println("---------------\n");
     }
     
-    public void displayCommand(){
+    public void displayHelpMenu(){
         System.out.println("\n--------------HELP MENU--------------");
         System.out.printf("| %2s %5s %-10s %10s \n", "n/north", "", "Move North","|");
         System.out.printf("| %2s %6s %-10s %10s \n", "e/east","","Move East","|");

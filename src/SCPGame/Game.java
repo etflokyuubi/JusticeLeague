@@ -39,9 +39,6 @@ public class Game {
 	                player1.moveWest();
 	                player1.enterRoom();
 	            }
-	            else if (playerInput.equalsIgnoreCase("help")){
-	                player1.displayCommand();
-	            }
 	            else if (playerInput.equalsIgnoreCase("explore")){
 	                player1.explore();
 	            }
@@ -55,6 +52,9 @@ public class Game {
 	            else if (playerInput.contains("drop")){
 	            	String itemId = playerInput.substring(5, playerInput.length());
 	                player1.dropItem(itemId);
+	            }
+	            else if (playerInput.equalsIgnoreCase("help")){
+	                player1.displayHelpMenu();
 	            }
 	            else{
 	                System.out.println("Please enter correct command.");
