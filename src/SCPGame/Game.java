@@ -39,6 +39,10 @@ public class Game {
 	                player1.moveWest();
 	                player1.enterRoom();
 	            }
+	            else if (playerInput.equalsIgnoreCase("explore")){
+	                player1.moveWest();
+	                player1.enterRoom();
+	            }
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }

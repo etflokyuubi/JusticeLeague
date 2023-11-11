@@ -116,5 +116,8 @@ public class Player {
         System.out.println("---------------\n");
     }
 
+    public void explore() {
+    	
+    }
 
 }
