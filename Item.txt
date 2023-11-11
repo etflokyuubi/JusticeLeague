@@ -115,4 +115,25 @@ Adrenaline Shot
 Consumable
 A basic item that allows the user to heal 30 health points.
 30
+
+3
+A01
+Brick
+Weapon
+A brick pulled from a cell wall. Does 20 damage per hit.
+20
+
+14
+A14
+COM-15 Sidearm
+Weapon
+A pistol that randomly spawns in any room on floor one. Does 25 damage points per shot.
+25
+
+19
+A13
+Micro H.I.D.
+Weapon
+A special weapon that serves as a high-intensity electrical discharge type weapon that can deal massive amounts of damage. Does 145 damage per shot.
+145
 ---END---
