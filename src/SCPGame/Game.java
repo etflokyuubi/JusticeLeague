@@ -5,6 +5,9 @@ import java.util.*;
 public class Game {
 	private Scanner input = new Scanner(System.in);
     Player player1;
+    Player playerSave;
+    Map gameMap;
+    Map mapSave;
 	public static void main(String[] args) {
 		Game game = new Game();
         game.start();
@@ -13,7 +16,7 @@ public class Game {
 	public void start(){
         System.out.println("Welcome to SCP Imminent Danger! Please type your name:");
         String playerName = input.nextLine();
-        Map gameMap = new Map();
+        gameMap = new Map();
         player1 = new Player(playerName,gameMap);
     }
 	
