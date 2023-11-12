@@ -177,63 +177,63 @@ public class Player {
     }
 
 //Action when Player fights Monster
-    public void fightMonster() {
-        if (currentRoom.getMonster() != null) {
-            Monster monster = currentRoom.getMonster();
-            System.out.println("You engage in a battle with the monster!");
-
-            int playerAttack = calculatePlayerAttack();  // Calculate player's attack value
-
-            // Player attacks the monster
-            monster.takeDamage(playerAttack);
-
-            // Check if the monster is defeated
-            if (monster.isDead()) {
-                System.out.println("You have defeated the monster!");
-                currentRoom.setMonster(null);  // Remove the defeated monster from the room
-            } else {
-                // Monster counterattacks
-                int monsterAttack = monster.getMonsterDmg();
-                setPlayerHP(getPlayerHP() - monsterAttack);
-
-                // Check if the player is defeated
-                if (getPlayerHP() <= 0) {
-                    System.out.println("You have been defeated by the monster.");
-                    revivePlayer();  // Revive the player at the spawn room
-                }
-            }
-        } else {
-            System.out.println("There's no monster to fight in this room.");
-        }
-    }
-
-    // Calculate the player's attack value based on equipped weapons
-    //private int calculatePlayerAttack() {
-       //int totalAttack = 0;
-
-        //for (Equippable weapon : equipped) {
-          //  if (weapon instanceof Weapon) {
-              //  totalAttack += ((Weapon) weapon).getAtkValue();
-           // }
-       // }
-
-        return totalAttack;
-    }
-
-    // Calculate the player's attack value based on equipped weapons
-    private int calculatePlayerAttack() {
-        int totalAttack = 0;
-
-        if (equipped != null) {
-            for (Equippable equippable : equipped) {
-                if (equippable instanceof Weapon) {
-                    totalAttack += ((Weapon) equippable).getAtkValue();
-                }
-            }
-        }
-
-        return totalAttack;
-    }
+//    public void fightMonster() {
+//        if (currentRoom.getMonster() != null) {
+//            Monster monster = currentRoom.getMonster();
+//            System.out.println("You engage in a battle with the monster!");
+//
+//            int playerAttack = calculatePlayerAttack();  // Calculate player's attack value
+//
+//            // Player attacks the monster
+//            monster.takeDamage(playerAttack);
+//
+//            // Check if the monster is defeated
+//            if (monster.isDead()) {
+//                System.out.println("You have defeated the monster!");
+//                currentRoom.setMonster(null);  // Remove the defeated monster from the room
+//            } else {
+//                // Monster counterattacks
+//                int monsterAttack = monster.getMonsterDmg();
+//                setPlayerHP(getPlayerHP() - monsterAttack);
+//
+//                // Check if the player is defeated
+//                if (getPlayerHP() <= 0) {
+//                    System.out.println("You have been defeated by the monster.");
+//                    revivePlayer();  // Revive the player at the spawn room
+//                }
+//            }
+//        } else {
+//            System.out.println("There's no monster to fight in this room.");
+//        }
+//    }
+//
+//    // Calculate the player's attack value based on equipped weapons
+//    //private int calculatePlayerAttack() {
+//       //int totalAttack = 0;
+//
+//        //for (Equippable weapon : equipped) {
+//          //  if (weapon instanceof Weapon) {
+//              //  totalAttack += ((Weapon) weapon).getAtkValue();
+//           // }
+//       // }
+//
+//        return totalAttack;
+//    }
+//
+//    // Calculate the player's attack value based on equipped weapons
+//    private int calculatePlayerAttack() {
+//        int totalAttack = 0;
+//
+//        if (equipped != null) {
+//            for (Equippable equippable : equipped) {
+//                if (equippable instanceof Weapon) {
+//                    totalAttack += ((Weapon) equippable).getAtkValue();
+//                }
+//            }
+//        }
+//
+//        return totalAttack;
+//    }
  
     public void weaponList() {
 	 
