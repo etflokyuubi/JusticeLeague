@@ -15,4 +15,16 @@ A18
 Level 3 Clearance Card
 Key Item
 An SCP Foundation security clearance card assigned to senior security and research personnel that require in-depth data regarding the source, recovery circumstances, and long-term planning for anomalous objects and entities in containment. Most senior research staff, project managers, security officers, response team members, and Mobile Task Force operatives hold a Level 3 security clearance.
+
+8
+A12
+SCP-714
+Required
+A green jade ring that can be expanded and contracted to perfectly fit the finger of anyone who touches it. Once worn, the ring grants its wearer immunities against a multitude of hazards. The ring can be removed and the effects are not permanent.
+
+20
+A23
+Nuke Deactivation
+Required
+Equip this to be able to enter room SZ-02.
 ---END---
