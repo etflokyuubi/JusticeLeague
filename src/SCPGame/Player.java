@@ -108,10 +108,10 @@ public class Player {
     }
     
     //Move player to Spawn Room
-    public void spawnRoom() {
-        setCurrentRoom(getSpawnRoom());
+    public void spawnRoom(Room room) {
+        setCurrentRoom(room);
         System.out.println("You are now in the spawn room.");
-        displayLocation();  // Display information about the spawn room
+        displayLocation();   
     }
     
     //Revive player to Spawn Room
@@ -176,18 +176,17 @@ public class Player {
         }
     }
 
-
+//Action when Player fights Monster
     public void fightMonster() {
         if (currentRoom.getMonster() != null) {
             Monster monster = currentRoom.getMonster();
             System.out.println("You engage in a battle with the monster!");
-            
-           
-            int playerAttack = 0;
-            
+
+            int playerAttack = calculatePlayerAttack();  // Calculate player's attack value
+
             // Player attacks the monster
             monster.takeDamage(playerAttack);
-            
+
             // Check if the monster is defeated
             if (monster.isDead()) {
                 System.out.println("You have defeated the monster!");
@@ -195,11 +194,10 @@ public class Player {
             } else {
                 // Monster counterattacks
                 int monsterAttack = monster.getMonsterDmg();
-                setPlayerHP(getPlayerHP() - monster.attack());
+                setPlayerHP(getPlayerHP() - monsterAttack);
 
-                
                 // Check if the player is defeated
-                if (playerHP <= 0) {
+                if (getPlayerHP() <= 0) {
                     System.out.println("You have been defeated by the monster.");
                     revivePlayer();  // Revive the player at the spawn room
                 }
@@ -207,6 +205,34 @@ public class Player {
         } else {
             System.out.println("There's no monster to fight in this room.");
         }
+    }
+
+    // Calculate the player's attack value based on equipped weapons
+    //private int calculatePlayerAttack() {
+       //int totalAttack = 0;
+
+        //for (Equippable weapon : equipped) {
+          //  if (weapon instanceof Weapon) {
+              //  totalAttack += ((Weapon) weapon).getAtkValue();
+           // }
+       // }
+
+        return totalAttack;
+    }
+
+    // Calculate the player's attack value based on equipped weapons
+    private int calculatePlayerAttack() {
+        int totalAttack = 0;
+
+        if (equipped != null) {
+            for (Equippable equippable : equipped) {
+                if (equippable instanceof Weapon) {
+                    totalAttack += ((Weapon) equippable).getAtkValue();
+                }
+            }
+        }
+
+        return totalAttack;
     }
  
     public void weaponList() {
