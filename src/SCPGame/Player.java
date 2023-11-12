@@ -103,10 +103,10 @@ public class Player {
     }
     
     //Move player to Spawn Room
-    public void spawnRoom() {
-        setCurrentRoom(getSpawnRoom());
+    public void spawnRoom(Room room) {
+        setCurrentRoom(room);
         System.out.println("You are now in the spawn room.");
-        displayLocation();  // Display information about the spawn room
+        displayLocation();   
     }
     
     //Revive player to Spawn Room
