@@ -47,7 +47,11 @@ public class Player {
 		if (currentRoom.getRequiredItem() == null)
 			return true;
 		else {
-			return (equipped.contains(currentRoom.getRequiredItem()));
+			for (Equippable e : equipped) {
+				if (e.getItemID().equalsIgnoreCase(currentRoom.getRequiredItem().getItemID()))
+					return true;
+			}
+			return false;
 		}
 	}
 

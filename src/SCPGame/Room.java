@@ -13,7 +13,7 @@ public class Room {
 	private boolean isVisited;
 	
 	private ArrayList<Item> roomItems = new ArrayList<>();
-	private Item requiredItem;
+	private Equippable requiredItem;
 	
 	private Puzzle puzzle;
 	private Monster monster;
@@ -54,7 +54,7 @@ public class Room {
 	
 	public ArrayList<Item> getRoomItems() { return roomItems; }
 
-	public Item getRequiredItem() { return requiredItem;}
+	public Equippable getRequiredItem() { return requiredItem;}
 
 	public Puzzle getPuzzle() { return puzzle; }
 
@@ -65,7 +65,7 @@ public class Room {
 
 	public void setRoomItems(ArrayList<Item> roomItems) { this.roomItems = roomItems; }
 
-	public void setRequiredItem(Item requiredItem) { this.requiredItem = requiredItem; }
+	public void setRequiredItem(Equippable requiredItem) { this.requiredItem = requiredItem; }
 
 	public void setPuzzle(Puzzle puzzle) { this.puzzle = puzzle; }
 

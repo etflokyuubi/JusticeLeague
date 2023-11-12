@@ -10,7 +10,7 @@ public class Map {
     ArrayList<Puzzle> puzzleList = new ArrayList<>();
     ArrayList<Monster> monsterList = new ArrayList<>();
     ArrayList<Item> combineItem = new ArrayList<>();
-    ArrayList<Item> requiredItem = new ArrayList<>();
+    ArrayList<Equippable> requiredItem = new ArrayList<>();
     
     public Map() {
         loadRoom();
@@ -47,7 +47,7 @@ public class Map {
         //System.out.println(monsterList);
         
         loadCombineRequired();
-        for (Item i : requiredItem) {
+        for (Equippable i : requiredItem) {
             myMap.get(i.getInitRoomID() - 1).setRequiredItem(i);;
         }
         //Uncomment the next line to see combine items' info
@@ -127,12 +127,16 @@ public class Map {
                 String itemID = scan.nextLine();
                 String itemName = scan.nextLine();
                 String itemType = scan.nextLine();
-                String itemDescription = scan.nextLine();
-                line = scan.nextLine();
-                if (itemType.equalsIgnoreCase("Required"))
-                	requiredItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
-                else
+                String itemDescription = scan.nextLine();         
+                if (itemType.equalsIgnoreCase("Required")) {
+                	int hpValue = Integer.parseInt(scan.nextLine());
+                	line = scan.nextLine();
+                	requiredItem.add(new Equippable(initRoomID, itemID, itemName, itemType, itemDescription, hpValue));
+                }
+                else {
+                	line = scan.nextLine();
                 	combineItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
+                }
             }
             scan.close();
         } catch (FileNotFoundException e){
