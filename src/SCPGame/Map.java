@@ -10,6 +10,7 @@ public class Map {
     ArrayList<Puzzle> puzzleList = new ArrayList<>();
     ArrayList<Monster> monsterList = new ArrayList<>();
     ArrayList<Item> combineItem = new ArrayList<>();
+    ArrayList<Item> requiredItem = new ArrayList<>();
     
     public Map() {
         loadRoom();
@@ -45,7 +46,10 @@ public class Map {
         //Uncomment the next line to see all monsters' info
         //System.out.println(monsterList);
         
-        loadCombineItem();
+        loadCombineRequired();
+        for (Item i : requiredItem) {
+            myMap.get(i.getInitRoomID() - 1).setRequiredItem(i);;
+        }
         //Uncomment the next line to see combine items' info
         //System.out.println(combineItem);
     }
@@ -113,10 +117,10 @@ public class Map {
         }
     }
     
-    //Loading Item information from Item.txt
-    public void loadCombineItem(){
+    //Loading Combine items and Required Items information from CombineRequired.txt
+    public void loadCombineRequired(){
         try {
-            Scanner scan = new Scanner(new File("CombineItem.txt"));
+            Scanner scan = new Scanner(new File("CombineRequired.txt"));
             while (scan.hasNext()) {
             	int initRoomID = scan.nextInt();
             	String line = scan.nextLine();
@@ -125,7 +129,10 @@ public class Map {
                 String itemType = scan.nextLine();
                 String itemDescription = scan.nextLine();
                 line = scan.nextLine();
-                combineItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
+                if (itemType.equalsIgnoreCase("Required"))
+                	requiredItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
+                else
+                	combineItem.add(new Item(initRoomID, itemID, itemName, itemType, itemDescription));
             }
             scan.close();
         } catch (FileNotFoundException e){

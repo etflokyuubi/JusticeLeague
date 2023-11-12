@@ -9,8 +9,7 @@ public class Equippable extends Item{
 		super(initRoomID, itemID, itemName, itemType, itemDescription);
 		this.hpValue = hpValue;
 	}
+
+	public int getHpValue() { return hpValue; }
 	
-	public int getHpValue() {
-		return hpValue;
-	}
 }

@@ -43,6 +43,13 @@ public class Player {
 
 	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
 	
+	public boolean checkRequiredItem() {
+		if (currentRoom.getRequiredItem() == null)
+			return true;
+		else {
+			return (equipped.contains(currentRoom.getRequiredItem()));
+		}
+	}
 
 	//Check if a room is Visited
 	public void checkVisited(){
@@ -91,6 +98,13 @@ public class Player {
         }
     }
     
+    //Move player to Spawn Room
+    public void spawnRoom() {
+        setCurrentRoom(getSpawnRoom());
+        System.out.println("You are now in the spawn room.");
+        displayLocation();  // Display information about the spawn room
+    }
+    
     //Revive player to Spawn Room
     public void revivePlayer() {
         if (playerHP <= 0) {
@@ -105,8 +119,22 @@ public class Player {
     
     //Action happens after player enter a room
     public void enterRoom(){
-        displayLocation();
-        playPuzzle();
+    	if(!checkRequiredItem()) {
+    		Scanner input = new Scanner(System.in);
+    		System.out.println("You didn't equip the right item, you're dead!");
+    		setPlayerHP(0);
+    		System.out.println("Press enter to revive at the spawn room or \"exit\" to quit the game.");
+    		String decision = input.nextLine();	
+    		if (decision.equalsIgnoreCase("exit")) {
+    			return;
+    		}
+    		else {
+    			revivePlayer();
+    		}
+    	} else {
+    		displayLocation();
+    		playPuzzle();
+    	}
     }
     
     public void inspectMonster() {
@@ -294,7 +322,9 @@ public class Player {
     			System.out.println(currentRoom.getPuzzle().getQuestion());
     			String answer = input.nextLine();
     			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
+    				System.out.println();
     				System.out.println("You solved the puzzle!");
+    				System.out.println();
     				currentRoom.setPuzzle(null);
     				break;
     			}
@@ -303,6 +333,7 @@ public class Player {
     			}
     			else {
     				numAttempts--;
+<<<<<<< HEAD
     				
     				System.out.println("You answered incorrectly.");
     				
@@ -314,6 +345,21 @@ public class Player {
     			System.out.println("Current Health: " + this.getPlayerHP());
     			
     			
+=======
+    				if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
+    					this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
+    					System.out.println();
+    					System.out.println("You answered incorrectly. You took damage.");
+    					System.out.println();
+    				}
+    				
+    			}
+    		}
+    		if (numAttempts == 0) {
+    			System.out.println();
+    			System.out.println("You failed the puzzle.");
+    			System.out.println();
+>>>>>>> 2ffe61808854ccc8ace260d698fc935badcc93a6
     		}
     	}
     }
@@ -409,6 +455,7 @@ public class Player {
     	}
     }
     
+    // Equip an item, moving them from the inventory to the equipment array
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
@@ -434,6 +481,7 @@ public class Player {
     	}
     }
     
+    // Unequip an item, moving them from the equipment array back to the inventory.
     public void unequipItem(String itemID) {
     	// search inventory
     	Item item = findEquip(itemID);
@@ -456,6 +504,7 @@ public class Player {
     	}
     }
     
+    // Display a list of items currently equipped.
     public void showEquipped(){
     	if(equipped.isEmpty()) {
     		System.out.println("\nYou have nothing equipped right now.\n");
@@ -475,6 +524,7 @@ public class Player {
     	}
     }
     
+    // Remove item from inventory array based on item ID
     public void removeFromInventory(String itemID) {
     	for(Item item : inventory) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
@@ -484,6 +534,7 @@ public class Player {
     	}
     }
     
+    // Remove item from equipped array based on item ID
     public void removeFromEquips(String itemID) {
     	for(Item item : equipped) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
