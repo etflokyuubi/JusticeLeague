@@ -10,7 +10,7 @@ public class Player {
 	private int playerHP;
 	
 	private ArrayList<Item> inventory = new ArrayList<>();
-	private ArrayList<Item> equipped = new ArrayList<>();
+	private ArrayList<Equippable> equipped = new ArrayList<>();
 	
 	//Constructor
 	public Player(String playerName, Map gameMap) {
@@ -34,7 +34,7 @@ public class Player {
 	
 	public ArrayList<Item> getInventory() { return inventory; }
 	
-	public ArrayList<Item> getEquipped() { return equipped; }
+	public ArrayList<Equippable> getEquipped() { return equipped; }
 
 	//Setter
 	public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
@@ -123,7 +123,7 @@ public class Player {
     }
 
 
- public void fightMonster() {
+    public void fightMonster() {
         if (currentRoom.getMonster() != null) {
             Monster monster = currentRoom.getMonster();
             System.out.println("You engage in a battle with the monster!");
@@ -155,7 +155,7 @@ public class Player {
         }
     }
  
- public void weaponList() {
+    public void weaponList() {
 	 
 	    System.out.println("\nYour list of weapons:");
 	    System.out.println("--------------------------");
@@ -266,6 +266,7 @@ public class Player {
     public void dropItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to drop.");
+    		System.out.println();
     	}
     	else {
     		Item item = findItem(itemID);
@@ -340,6 +341,15 @@ public class Player {
     	return null;
     }
     
+    public Item findEquip(String itemID) {
+    	for(Item item : equipped) {
+			if(item.getItemID().equals(itemID)) {
+				return item;
+			}
+    	}
+    	return null;
+    }
+    
     //Remove all key cards in inventory while doing combine
     public void removeAllKeys(String itemID) {
     	for(int i = 0; i < inventory.size(); i++) {
@@ -395,7 +405,83 @@ public class Player {
     }
     
     public void equipItem(String itemID) {
+    	// search inventory
+    	Item item = findItem(itemID);
     	
+    	// if an item is found in the inventory, place it in the equipment array
+    	if (inventory.isEmpty()) {
+    		System.out.println();
+    		System.out.println("You literally have nothing. Pick something up.");
+    		System.out.println();
+    		
+    	} else if(item != null && item instanceof Equippable) {
+    		removeFromInventory(itemID);
+    		equipped.add((Equippable) item);
+    		System.out.println();
+    		System.out.println("You've successfully equipped " + item.getItemName() + ".");
+    		System.out.println();
+    	} else if( !(item instanceof Equippable) ) {
+    		System.out.println();
+    		System.out.println("This is not an equippable item.\n");
+    	} else {
+    		System.out.println();
+    		System.out.println("This item was not found in your inventory.\n");
+    	}
+    }
+    
+    public void unequipItem(String itemID) {
+    	// search inventory
+    	Item item = findEquip(itemID);
+    	
+    	// if an item is found in the inventory, place it in the equipment array
+    	if (equipped.isEmpty()) {
+    		System.out.println();
+    		System.out.println("There's nothing on you to remove.");
+    		System.out.println();
+    		
+    	} else if(item != null) {
+    		removeFromEquips(itemID);
+    		inventory.add((Equippable) item);
+    		System.out.println("You've successfully unequipped " + item.getItemName() + ".");
+    		System.out.println();
+    	} else {
+    		System.out.println();
+    		System.out.println("You don't have this item on you.");
+    		System.out.println();
+    	}
+    }
+    
+    public void showEquipped(){
+    	if(equipped.isEmpty()) {
+    		System.out.println("\nYou have nothing equipped right now.\n");
+    	}
+    	else {
+    		Collections.sort(equipped);
+    		System.out.println();
+    		System.out.println("Here's what's on you:");
+    		for(Equippable equip : equipped) {
+    			System.out.println("----------------------------\n" + equip.getItemID() + ": " + equip.getItemName());
+    		}
+    		System.out.println("----------------------------\n");
+    	}
+    }
+    
+    public void removeFromInventory(String itemID) {
+    	for(Item item : inventory) {
+    		if(item.getItemID().equalsIgnoreCase(itemID)) {
+    			inventory.remove(inventory.indexOf(item));
+    			break;
+    		}
+    	}
+    }
+    
+    public void removeFromEquips(String itemID) {
+    	for(Item item : equipped) {
+    		if(item.getItemID().equalsIgnoreCase(itemID)) {
+    			equipped.remove(equipped.indexOf(item));
+    			break;
+    		}
+    	}
     }
 
 
