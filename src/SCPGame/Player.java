@@ -43,6 +43,13 @@ public class Player {
 
 	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
 	
+	public boolean checkRequiredItem() {
+		if (currentRoom.getRequiredItem() == null)
+			return true;
+		else {
+			return (equipped.contains(currentRoom.getRequiredItem()));
+		}
+	}
 
 	//Check if a room is Visited
 	public void checkVisited(){
@@ -105,8 +112,22 @@ public class Player {
     
     //Action happens after player enter a room
     public void enterRoom(){
-        displayLocation();
-        playPuzzle();
+    	if(!checkRequiredItem()) {
+    		Scanner input = new Scanner(System.in);
+    		System.out.println("You didn't equip the right item, you're dead!");
+    		setPlayerHP(0);
+    		System.out.println("Press enter to revive at the spawn room or \"exit\" to quit the game.");
+    		String decision = input.nextLine();	
+    		if (decision.equalsIgnoreCase("exit")) {
+    			return;
+    		}
+    		else {
+    			revivePlayer();
+    		}
+    	} else {
+    		displayLocation();
+    		playPuzzle();
+    	}
     }
     
     public void inspectMonster() {

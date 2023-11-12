@@ -72,6 +72,8 @@ public class Game {
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }
+	            if (player1.getPlayerHP() <= 0)
+	            	break;
 	            System.out.println("Please input your command: ");
 	            playerInput = input.nextLine();
 	        }
