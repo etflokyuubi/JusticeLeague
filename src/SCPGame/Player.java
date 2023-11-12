@@ -287,7 +287,7 @@ public class Player {
     	
     	Scanner input = new Scanner(System.in);
     	
-    	if (currentRoom.getPuzzle()!= null) {
+    	if (  currentRoom.getPuzzle()!= null) {
     		System.out.println("Hey you have a puzzle to solve!");
     		int numAttempts = currentRoom.getPuzzle().getAttempts();
     		while (numAttempts > 0 ) {
@@ -298,17 +298,22 @@ public class Player {
     				currentRoom.setPuzzle(null);
     				break;
     			}
+    			else if (answer.equalsIgnoreCase("hint")) {
+    				System.out.println(currentRoom.getPuzzle().getHint());
+    			}
     			else {
     				numAttempts--;
-    				if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
-    					this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
-    					System.out.println("You answered incorrectly. You took damage.");
-    				}
+    				
+    				System.out.println("You answered incorrectly.");
     				
     			}
     		}
-    		if (numAttempts == 0) {
-    			System.out.println("You failed the puzzle.");
+    		    if (numAttempts == 0) {
+    			System.out.println("You failed the puzzle. You took damage");
+    			this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg() );
+    			System.out.println("Current Health: " + this.getPlayerHP());
+    			
+    			
     		}
     	}
     }
