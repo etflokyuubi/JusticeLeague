@@ -43,6 +43,7 @@ public class Player {
 
 	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
 	
+	//Check required item when enter a room
 	public boolean checkRequiredItem() {
 		if (currentRoom.getRequiredItem() == null)
 			return true;

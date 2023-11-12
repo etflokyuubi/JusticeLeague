@@ -16,7 +16,7 @@ public class Map {
         loadRoom();
         System.out.println("Finish loading Room");
         //Uncomment the next line to see all rooms' info
-        //System.out.println(myMap);
+        System.out.println(myMap);
 
         loadItem();
         
@@ -69,9 +69,10 @@ public class Map {
                 int eastRoom = scan.nextInt();
                 int southRoom = scan.nextInt();
                 int westRoom = scan.nextInt();
+                boolean locked = scan.nextBoolean();
                 line = scan.nextLine();
                 line = scan.nextLine();
-                myMap.add(new Room(roomID,roomName,roomDescription,northRoom,eastRoom,southRoom,westRoom,false));
+                myMap.add(new Room(roomID,roomName,roomDescription,northRoom,eastRoom,southRoom,westRoom,false, locked));
             }
             scan.close();
             
