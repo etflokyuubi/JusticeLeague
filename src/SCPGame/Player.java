@@ -318,8 +318,8 @@ public class Player {
     	if (currentRoom.getPuzzle()!= null) {
     		System.out.println("Hey you have a puzzle to solve!");
     		int numAttempts = currentRoom.getPuzzle().getAttempts();
+    		System.out.println(currentRoom.getPuzzle().getQuestion());
     		while (numAttempts > 0 ) {
-    			System.out.println(currentRoom.getPuzzle().getQuestion());
     			String answer = input.nextLine();
     			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
     				System.out.println();
@@ -335,6 +335,10 @@ public class Player {
     					System.out.println();
     					System.out.println("You answered incorrectly. You took damage.");
     					System.out.println();
+    				}
+    				else {
+    					System.out.println();
+    					System.out.println("Wrong answer. Try again");
     				}
     				
     			}
