@@ -460,7 +460,11 @@ public class Player {
     		System.out.println();
     		System.out.println("Here's what's on you:");
     		for(Equippable equip : equipped) {
-    			System.out.println("----------------------------\n" + equip.getItemID() + ": " + equip.getItemName());
+    			if(equip.getHpValue() > 0) {
+    				System.out.println("----------------------------\n" + equip.getItemID() + ": " + equip.getItemName() + " +" + equip.getHpValue() + " HP.");
+    			} else {
+    				System.out.println("----------------------------\n" + equip.getItemID() + ": " + equip.getItemName());
+    			}
     		}
     		System.out.println("----------------------------\n");
     	}
