@@ -91,6 +91,13 @@ public class Player {
         }
     }
     
+    //Move player to Spawn Room
+    public void spawnRoom() {
+        setCurrentRoom(getSpawnRoom());
+        System.out.println("You are now in the spawn room.");
+        displayLocation();  // Display information about the spawn room
+    }
+    
     //Revive player to Spawn Room
     public void revivePlayer() {
         if (playerHP <= 0) {
