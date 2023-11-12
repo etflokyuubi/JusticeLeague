@@ -76,9 +76,13 @@ public class Game {
 	            	String itemId = playerInput.substring(8, playerInput.length());
 	                player1.unequipItem(itemId);
 	            }
-	            else if (playerInput.contains("equip")){
+	            else if (playerInput.contains("equip") && !playerInput.contains("unequip")){
 	            	String itemId = playerInput.substring(6, playerInput.length());
 	                player1.equipItem(itemId);
+	            }
+	            else if (playerInput.contains("use")){
+	            	String itemId = playerInput.substring(4, playerInput.length());
+	                player1.useItem(itemId);
 	            }
 	            else if (playerInput.equalsIgnoreCase("stats")){
 	                player1.showEquipped();

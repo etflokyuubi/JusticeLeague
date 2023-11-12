@@ -11,16 +11,17 @@ public class Room {
 	private int southRoom;
 	private int westRoom;
 	private boolean isVisited;
+	private String keyID;
 	
 	private ArrayList<Item> roomItems = new ArrayList<>();
-	private Item requiredItem;
+	private Equippable requiredItem;
 	
 	private Puzzle puzzle;
 	private Monster monster;
 	
 	//Constructor
 	public Room(int roomID, String roomName, String roomDescription, int northRoom, int eastRoom, int southRoom,
-			int westRoom, boolean isVisited) {
+			int westRoom, boolean isVisited, String keyID) {
 		super();
 		this.roomID = roomID;
 		this.roomName = roomName;
@@ -33,6 +34,7 @@ public class Room {
 		this.requiredItem = null;
 		this.puzzle = null;
 		this.monster = null;
+		this.keyID = keyID;
 	}
 	
 	//Getter
@@ -54,34 +56,35 @@ public class Room {
 	
 	public ArrayList<Item> getRoomItems() { return roomItems; }
 
-	public Item getRequiredItem() { return requiredItem;}
+	public Equippable getRequiredItem() { return requiredItem;}
 
 	public Puzzle getPuzzle() { return puzzle; }
 
 	public Monster getMonster() { return monster; }
 	
+	public String getKeyID() { return keyID; }
+
 	//Setter
 	public void setVisited(boolean isVisited) { this.isVisited = isVisited; }
 
 	public void setRoomItems(ArrayList<Item> roomItems) { this.roomItems = roomItems; }
 
-	public void setRequiredItem(Item requiredItem) { this.requiredItem = requiredItem; }
+	public void setRequiredItem(Equippable requiredItem) { this.requiredItem = requiredItem; }
 
 	public void setPuzzle(Puzzle puzzle) { this.puzzle = puzzle; }
 
 	public void setMonster(Monster monster) { this.monster = monster; }
 	
 	public void addItem(Item i) { this.roomItems.add(i); }
+	
+	public void setKeyID(String keyID) { this.keyID = keyID; }
 
 	@Override
 	public String toString() {
 		return "Room [roomID=" + roomID + ", roomName=" + roomName + ", roomDescription=" + roomDescription
 				+ ", northRoom=" + northRoom + ", eastRoom=" + eastRoom + ", southRoom=" + southRoom + ", westRoom="
-				+ westRoom + "]\n";
+				+ westRoom + ", isVisited=" + isVisited + ", keyID=" + keyID + ", roomItems=" + roomItems
+				+ ", requiredItem=" + requiredItem + ", puzzle=" + puzzle + ", monster=" + monster + "]\n";
 	}
-
-
-	
-	
 	
 }

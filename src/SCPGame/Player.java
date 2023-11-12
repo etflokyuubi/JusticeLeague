@@ -43,11 +43,20 @@ public class Player {
 
 	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
 	
+	public boolean checkKey() {
+		return (currentRoom.getKeyID().equals("0"));
+	}
+	
+	//Check required item when enter a room
 	public boolean checkRequiredItem() {
 		if (currentRoom.getRequiredItem() == null)
 			return true;
 		else {
-			return (equipped.contains(currentRoom.getRequiredItem()));
+			for (Equippable e : equipped) {
+				if (e.getItemID().equalsIgnoreCase(currentRoom.getRequiredItem().getItemID()))
+					return true;
+			}
+			return false;
 		}
 	}
 
@@ -99,10 +108,10 @@ public class Player {
     }
     
     //Move player to Spawn Room
-    public void spawnRoom() {
-        setCurrentRoom(getSpawnRoom());
+    public void spawnRoom(Room room) {
+        setCurrentRoom(room);
         System.out.println("You are now in the spawn room.");
-        displayLocation();  // Display information about the spawn room
+        displayLocation();   
     }
     
     //Revive player to Spawn Room
@@ -119,7 +128,24 @@ public class Player {
     
     //Action happens after player enter a room
     public void enterRoom(){
-    	if(!checkRequiredItem()) {
+    	if (!checkKey()) {
+    		Item key = null;
+    		for(Item item : gameMap.itemList) {
+    			if(item.getItemID().equals(currentRoom.getKeyID())) {
+    				key = item;
+    			}
+        	}
+    		if (key == null) {
+    			for(Item item : gameMap.combineItem) {
+        			if(item.getItemID().equals(currentRoom.getKeyID())) {
+        				key = item;
+        			}
+            	}
+    		}
+    		setCurrentRoom(gameMap.getRoom(currentRoom.getRoomID()-1));
+    		System.out.println("\nThe next room is locked, you need to use " + key.getItemName() + " to unlock.\n");
+    	}
+    	else if(!checkRequiredItem()) {
     		Scanner input = new Scanner(System.in);
     		System.out.println("You didn't equip the right item, you're dead!");
     		setPlayerHP(0);
@@ -150,38 +176,64 @@ public class Player {
         }
     }
 
-
-    public void fightMonster() {
-        if (currentRoom.getMonster() != null) {
-            Monster monster = currentRoom.getMonster();
-            System.out.println("You engage in a battle with the monster!");
-            
-           
-            int playerAttack = 0;
-            
-            // Player attacks the monster
-            monster.takeDamage(playerAttack);
-            
-            // Check if the monster is defeated
-            if (monster.isDead()) {
-                System.out.println("You have defeated the monster!");
-                currentRoom.setMonster(null);  // Remove the defeated monster from the room
-            } else {
-                // Monster counterattacks
-                int monsterAttack = monster.getMonsterDmg();
-                setPlayerHP(getPlayerHP() - monster.attack());
-
-                
-                // Check if the player is defeated
-                if (playerHP <= 0) {
-                    System.out.println("You have been defeated by the monster.");
-                    revivePlayer();  // Revive the player at the spawn room
-                }
-            }
-        } else {
-            System.out.println("There's no monster to fight in this room.");
-        }
-    }
+//Action when Player fights Monster
+//    public void fightMonster() {
+//        if (currentRoom.getMonster() != null) {
+//            Monster monster = currentRoom.getMonster();
+//            System.out.println("You engage in a battle with the monster!");
+//
+//            int playerAttack = calculatePlayerAttack();  // Calculate player's attack value
+//
+//            // Player attacks the monster
+//            monster.takeDamage(playerAttack);
+//
+//            // Check if the monster is defeated
+//            if (monster.isDead()) {
+//                System.out.println("You have defeated the monster!");
+//                currentRoom.setMonster(null);  // Remove the defeated monster from the room
+//            } else {
+//                // Monster counterattacks
+//                int monsterAttack = monster.getMonsterDmg();
+//                setPlayerHP(getPlayerHP() - monsterAttack);
+//
+//                // Check if the player is defeated
+//                if (getPlayerHP() <= 0) {
+//                    System.out.println("You have been defeated by the monster.");
+//                    revivePlayer();  // Revive the player at the spawn room
+//                }
+//            }
+//        } else {
+//            System.out.println("There's no monster to fight in this room.");
+//        }
+//    }
+//
+//    // Calculate the player's attack value based on equipped weapons
+//    //private int calculatePlayerAttack() {
+//       //int totalAttack = 0;
+//
+//        //for (Equippable weapon : equipped) {
+//          //  if (weapon instanceof Weapon) {
+//              //  totalAttack += ((Weapon) weapon).getAtkValue();
+//           // }
+//       // }
+//
+//        return totalAttack;
+//    }
+//
+//    // Calculate the player's attack value based on equipped weapons
+//    private int calculatePlayerAttack() {
+//        int totalAttack = 0;
+//
+//        if (equipped != null) {
+//            for (Equippable equippable : equipped) {
+//                if (equippable instanceof Weapon) {
+//                    totalAttack += ((Weapon) equippable).getAtkValue();
+//                }
+//            }
+//        }
+//
+//        return totalAttack;
+//    }
  
     public void weaponList() {
 	 
@@ -311,10 +363,9 @@ public class Player {
     	}
     }
 
+    // Display the puzzle in a room
     public void playPuzzle () {
-    	
     	Scanner input = new Scanner(System.in);
-    	
     	if (currentRoom.getPuzzle()!= null) {
     		System.out.println("Hey you have a puzzle to solve!");
     		int numAttempts = currentRoom.getPuzzle().getAttempts();
@@ -351,7 +402,7 @@ public class Player {
     	}
     }
 
-    //Inspect item
+    // Inspect an item to see the description
     public void inspectItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to inspect.");
@@ -369,7 +420,7 @@ public class Player {
     	}
     }
     
-    //Find an item in inventory
+    // Find an item in inventory based on itemID
     public Item findItem(String itemID) {
     	for(Item item : inventory) {
 			if(item.getItemID().equals(itemID)) {
@@ -379,6 +430,7 @@ public class Player {
     	return null;
     }
     
+    // Find an item in equipped based on itemID
     public Item findEquip(String itemID) {
     	for(Item item : equipped) {
 			if(item.getItemID().equals(itemID)) {
@@ -388,7 +440,7 @@ public class Player {
     	return null;
     }
     
-    //Remove all key cards in inventory while doing combine
+    // Remove all key cards in inventory while doing combine
     public void removeAllKeys(String itemID) {
     	for(int i = 0; i < inventory.size(); i++) {
 			if(inventory.get(i).getItemID().equals(itemID)) {
@@ -398,7 +450,7 @@ public class Player {
     	}
     }
     
-    //Combine 2 keys to get the higher level key
+    // Combine 2 keys to get the higher level key
     public void combineItem() {
     	if (currentRoom.getRoomID() != 5) {
     		System.out.println("\nYou can only combine items in Room LC-05.\n");
@@ -449,22 +501,15 @@ public class Player {
     	
     	// if an item is found in the inventory, place it in the equipment array
     	if (inventory.isEmpty()) {
-    		System.out.println();
-    		System.out.println("You literally have nothing. Pick something up.");
-    		System.out.println();
-    		
+    		System.out.println("\nYou literally have nothing. Pick something up.\n");
     	} else if(item != null && item instanceof Equippable) {
     		removeFromInventory(itemID);
     		equipped.add((Equippable) item);
-    		System.out.println();
-    		System.out.println("You've successfully equipped " + item.getItemName() + ".");
-    		System.out.println();
+    		System.out.println("\nYou've successfully equipped " + item.getItemName() + ".\n");
     	} else if( !(item instanceof Equippable) ) {
-    		System.out.println();
-    		System.out.println("This is not an equippable item.\n");
+    		System.out.println("\nThis is not an equippable item.\n");
     	} else {
-    		System.out.println();
-    		System.out.println("This item was not found in your inventory.\n");
+    		System.out.println("\nThis item was not found in your inventory.\n");
     	}
     }
     
@@ -475,19 +520,14 @@ public class Player {
     	
     	// if an item is found in the inventory, place it in the equipment array
     	if (equipped.isEmpty()) {
-    		System.out.println();
-    		System.out.println("There's nothing on you to remove.");
-    		System.out.println();
+    		System.out.println("\nThere's nothing on you to remove.\n");
     		
     	} else if(item != null) {
     		removeFromEquips(itemID);
     		inventory.add((Equippable) item);
-    		System.out.println("You've successfully unequipped " + item.getItemName() + ".");
-    		System.out.println();
+    		System.out.println("\nYou've successfully unequipped " + item.getItemName() + ".\n");
     	} else {
-    		System.out.println();
-    		System.out.println("You don't have this item on you.");
-    		System.out.println();
+    		System.out.println("\nYou don't have this item on you.\n");
     	}
     }
     
@@ -531,6 +571,30 @@ public class Player {
     	}
     }
 
+    public void useItem(String itemID) {
+    	if (inventory.isEmpty()) {
+    		System.out.println("\nYou literally have nothing. Pick something up.\n");
+    		return;
+    	}
+    	Item item = findItem(itemID);
+    	if (item == null) {
+    		System.out.println("\nYou don't have this item in your inventory.\n");
+    	}
+    	else if (!(item instanceof Consumable) && item.getItemType().equalsIgnoreCase("Key Item")) {
+    		useKey(item);
+    	} else
+    		return;
+    }
+    
+    public void useKey(Item key) {
+    	Room nextRoom = gameMap.getRoom(currentRoom.getRoomID()+1);
+    	if (nextRoom.getKeyID().equalsIgnoreCase("0"))
+    		System.out.println("There's no room to unlock.");
+    	else {
+    		nextRoom.setKeyID("0");
+    		System.out.println("\nYou have successfully unlock the next room!\n");
+    	}
+    }
 
 }
     
