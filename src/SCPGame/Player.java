@@ -301,7 +301,9 @@ public class Player {
     			System.out.println(currentRoom.getPuzzle().getQuestion());
     			String answer = input.nextLine();
     			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
+    				System.out.println();
     				System.out.println("You solved the puzzle!");
+    				System.out.println();
     				currentRoom.setPuzzle(null);
     				break;
     			}
@@ -309,13 +311,17 @@ public class Player {
     				numAttempts--;
     				if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
     					this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
+    					System.out.println();
     					System.out.println("You answered incorrectly. You took damage.");
+    					System.out.println();
     				}
     				
     			}
     		}
     		if (numAttempts == 0) {
+    			System.out.println();
     			System.out.println("You failed the puzzle.");
+    			System.out.println();
     		}
     	}
     }
@@ -411,6 +417,7 @@ public class Player {
     	}
     }
     
+    // Equip an item, moving them from the inventory to the equipment array
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
@@ -436,6 +443,7 @@ public class Player {
     	}
     }
     
+    // Unequip an item, moving them from the equipment array back to the inventory.
     public void unequipItem(String itemID) {
     	// search inventory
     	Item item = findEquip(itemID);
@@ -458,6 +466,7 @@ public class Player {
     	}
     }
     
+    // Display a list of items currently equipped.
     public void showEquipped(){
     	if(equipped.isEmpty()) {
     		System.out.println("\nYou have nothing equipped right now.\n");
@@ -477,6 +486,7 @@ public class Player {
     	}
     }
     
+    // Remove item from inventory array based on item ID
     public void removeFromInventory(String itemID) {
     	for(Item item : inventory) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
@@ -486,6 +496,7 @@ public class Player {
     	}
     }
     
+    // Remove item from equipped array based on item ID
     public void removeFromEquips(String itemID) {
     	for(Item item : equipped) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
