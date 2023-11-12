@@ -69,6 +69,17 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("combine")){
 	                player1.combineItem();
 	            }
+	            else if (playerInput.contains("unequip")){
+	            	String itemId = playerInput.substring(8, playerInput.length());
+	                player1.unequipItem(itemId);
+	            }
+	            else if (playerInput.contains("equip")){
+	            	String itemId = playerInput.substring(6, playerInput.length());
+	                player1.equipItem(itemId);
+	            }
+	            else if (playerInput.equalsIgnoreCase("stats")){
+	                player1.showEquipped();
+	            }
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }
