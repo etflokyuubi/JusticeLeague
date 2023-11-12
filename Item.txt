@@ -130,4 +130,25 @@ Micro H.I.D.
 Weapon
 A special weapon that serves as a high-intensity electrical discharge type weapon that can deal massive amounts of damage. Does 145 damage per shot.
 145
+
+2
+A02
+Combat Armor
+Equippable
+Increases HP by 50 points.
+50
+
+7
+A12
+SCP-714
+Equippable
+A green jade ring that can be expanded and contracted to perfectly fit the finger of anyone who touches it. Once worn, the ring grants its wearer immunities against a multitude of hazards. The ring can be removed and the effects are not permanent.
+0
+
+23
+A23
+Nuke Deactivation
+Equippable
+Equip this to be able to enter room SZ-02.
+0
 ---END---

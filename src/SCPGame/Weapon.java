@@ -1,6 +1,3 @@
-/**
- * 
- */
 package SCPGame;
 
 public class Weapon extends Item{

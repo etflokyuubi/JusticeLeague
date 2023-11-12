@@ -129,7 +129,7 @@ public class Player {
             System.out.println("You engage in a battle with the monster!");
             
            
-            int playerAttack =0;
+            int playerAttack = 0;
             
             // Player attacks the monster
             monster.takeDamage(playerAttack);
@@ -156,7 +156,9 @@ public class Player {
     }
  
  public void weaponList() {
-	    System.out.println("Your list of weapons:");
+	 
+	    System.out.println("\nYour list of weapons:");
+	    System.out.println("--------------------------");
 
 	    boolean foundWeapons = false;
 
@@ -166,7 +168,7 @@ public class Player {
 	            System.out.println("Weapon ID: " + weapon.getItemID());
 	            System.out.println("Weapon Name: " + weapon.getItemName());
 	            System.out.println("Attack Value: " + weapon.getAtkValue());
-	            System.out.println("--------------------------");
+	            System.out.println("--------------------------\n");
 	            foundWeapons = true;
 	        }
 	    }
@@ -212,6 +214,7 @@ public class Player {
     		System.out.println("\nNothing but this weird room here.\n");
     	}
     	else {
+    		Collections.sort(currentRoom.getRoomItems());
     		System.out.println();
     		for(Item item : currentRoom.getRoomItems()) {
     			System.out.println("----------------------------\n" + item.getItemID() + ": " + item.getItemName());
@@ -226,6 +229,7 @@ public class Player {
     		System.out.println("\nYou have nothing in your inventory right now.\n");
     	}
     	else {
+    		Collections.sort(inventory);
     		System.out.println();
     		for(Item item : inventory) {
     			System.out.println("----------------------------\n" + item.getItemID() + ": " + item.getItemName());
@@ -247,7 +251,6 @@ public class Player {
     				inventory.add(item);
     				System.out.println();
     				System.out.println("You've pickup up " + item.getItemName() + " and placed it in your inventory.");
-    				Collections.sort(inventory);
     				itemfound = true;
     				break;
     			}
@@ -349,6 +352,10 @@ public class Player {
     
     //Combine 2 keys to get the higher level key
     public void combineItem() {
+    	if (currentRoom.getRoomID() != 5) {
+    		System.out.println("\nYou can only combine items in Room LC-05.\n");
+    		return;
+    	}
     	int key0 = 0, key1 = 0, key2 = 0;
     	for (Item item : inventory) {
     		if (item.getItemID().equalsIgnoreCase("A15"))
@@ -385,7 +392,6 @@ public class Player {
     	else {
     		System.out.println("\nYou don't have any items to combine.\n");
     	}
-    		
     }
     
     public void equipItem(String itemID) {

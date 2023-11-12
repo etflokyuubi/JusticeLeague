@@ -10,11 +10,11 @@ This is a security office that contains a locker and theres a note next to it th
 This is another Class-D cell with a hidden hole in the wall that contains contraband keycards and documentation about SCP-049. The user can also pick up the brick used to unlock the hidden hole.~
 0~1~0~0~
 
-4~LZ-04~
+4~LC-04~
 You encountered SCP-173 in a very lit room, underneath SCP-173 is a murky puddle. You feel strangled.~
 1~0~5~0~
 
-5~LZ-05~
+5~LC-05~
 SCP-914 is a device that allows its user to place items into it to then upgrade, downgrade, or destroy the items.~
 4~0~6~0~
 

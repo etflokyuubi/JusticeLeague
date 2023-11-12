@@ -93,10 +93,14 @@ public class Map {
                 	int hpValue = Integer.parseInt(scan.nextLine());
                 	line = scan.nextLine();
                 	itemList.add(new Consumable(initRoomID, itemID, itemName, itemType, itemDescription, hpValue));
-                }else if(itemType.equalsIgnoreCase("Weapon")) {
+                } else if(itemType.equalsIgnoreCase("Weapon")) {
                 	int atkValue = Integer.parseInt(scan.nextLine());
                 	line = scan.nextLine();
                 	itemList.add(new Weapon(initRoomID, itemID, itemName, itemType, itemDescription, atkValue));
+                }  else if(itemType.equalsIgnoreCase("Equippable")) {
+                	int hpValue = Integer.parseInt(scan.nextLine());
+                	line = scan.nextLine();
+                	itemList.add(new Equippable(initRoomID, itemID, itemName, itemType, itemDescription, hpValue));
                 }  
                 else {
                 	line = scan.nextLine();
