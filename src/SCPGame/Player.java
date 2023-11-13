@@ -11,6 +11,7 @@ public class Player {
 	
 	private ArrayList<Item> inventory = new ArrayList<>();
 	private ArrayList<Equippable> equipped = new ArrayList<>();
+	private ArrayList<Weapon> weapons = new ArrayList<>();
 	
 	//Constructor
 	public Player(String playerName, Map gameMap) {
@@ -23,7 +24,7 @@ public class Player {
 	     this.playerHP = 100;
 	}
 	
-	//Getter
+	// Getter
     public String getPlayerName() { return playerName; }
 
 	public Room getCurrentRoom() { return currentRoom; }
@@ -36,7 +37,7 @@ public class Player {
 	
 	public ArrayList<Equippable> getEquipped() { return equipped; }
 
-	//Setter
+	// Setter
 	public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
 
 	public void setSpawnRoom(Room spawnRoom) { this.spawnRoom = spawnRoom; }
@@ -47,7 +48,8 @@ public class Player {
 		return (currentRoom.getKeyID().equals("0"));
 	}
 	
-	//Check required item when enter a room
+	// Check required item when enter a room
+	// Thu
 	public boolean checkRequiredItem() {
 		if (currentRoom.getRequiredItem() == null)
 			return true;
@@ -60,14 +62,16 @@ public class Player {
 		}
 	}
 
-	//Check if a room is Visited
+	// Check if a room is Visited
+	// Thu
 	public void checkVisited(){
         if (currentRoom.isVisited())
             System.out.println("This Region looks familiar.");
         else currentRoom.setVisited(true);
     }
 
-	//Move player to North Room
+	// Move player to North Room
+	// Thu
     public void moveNorth(){
         if (currentRoom.getNorthRoom() == 0)
             System.out.println("You cannot go this way. Please choose another direction!");
@@ -77,7 +81,8 @@ public class Player {
         }
     }
 
-    //Move player to East Room
+    // Move player to East Room
+    // Thu
     public void moveEast(){
         if (currentRoom.getEastRoom() == 0)
             System.out.println("You cannot go this way. Please choose another direction!");
@@ -87,7 +92,8 @@ public class Player {
         }
     }
 
-    //Move player to South Room
+    // Move player to South Room
+    // Thu
     public void moveSouth(){
         if (currentRoom.getSouthRoom() == 0)
             System.out.println("You cannot go this way. Please choose another direction!");
@@ -97,7 +103,8 @@ public class Player {
         }
     }
 
-    //Move player to West Room
+    // Move player to West Room
+    // Thu
     public void moveWest(){
         if (currentRoom.getWestRoom() == 0)
             System.out.println("You cannot go this way. Please choose another direction!");
@@ -107,14 +114,16 @@ public class Player {
         }
     }
     
-    //Move player to Spawn Room
+    // Move player to Spawn Room
+    // Andrew
     public void spawnRoom(Room room) {
         setCurrentRoom(room);
         System.out.println("You are now in the spawn room.");
         displayLocation();   
     }
     
-    //Revive player to Spawn Room
+    // Revive player to Spawn Room
+    // Andrew
     public void revivePlayer() {
         if (playerHP <= 0) {
             System.out.println("You have been revived at the spawn room.");
@@ -126,7 +135,8 @@ public class Player {
         }
     }
     
-    //Action happens after player enter a room
+    // Action happens after player enter a room
+    // Thu
     public void enterRoom(){
     	if (!checkKey()) {
     		Item key = null;
@@ -163,102 +173,155 @@ public class Player {
     	}
     }
     
+    // Inspect a monster a room
+    // Thu
     public void inspectMonster() {
         if (currentRoom.getMonster() != null) {
             Monster monster = currentRoom.getMonster();
             System.out.println("You inspect the monster in the room:");
+            System.out.println("--------------------------");
             System.out.println("Monster ID: " + monster.getMonsterID());
             System.out.println("Monster Name: " + monster.getMonsterName());
             System.out.println("Monster HP: " + monster.getMonsterHP());
             System.out.println("Monster Attack: " + monster.getMonsterDmg());
+            System.out.println("--------------------------");
+            System.out.println("What do you want to do with it?");
+            System.out.println("1. Fight it (fight)");
+            System.out.println("2. Leave it alone (ignore)");
+            Scanner input = new Scanner(System.in);
+            String answer = input.nextLine();
+            while(!answer.equalsIgnoreCase("fight") && !answer.equalsIgnoreCase("ignore")){
+                System.out.println("Please type \"fight\" or \"ignore\".");
+                answer = input.nextLine();
+            }
+            if (answer.equalsIgnoreCase("fight")) {
+                fightMonster();
+            }
+            else {
+                System.out.println("\nSCP is still here if you come back!\n");
+            }
         } else {
             System.out.println("There's no monster to inspect in this room.");
         }
     }
 
-//Action when Player fights Monster
-//    public void fightMonster() {
-//        if (currentRoom.getMonster() != null) {
-//            Monster monster = currentRoom.getMonster();
-//            System.out.println("You engage in a battle with the monster!");
-//
-//            int playerAttack = calculatePlayerAttack();  // Calculate player's attack value
-//
-//            // Player attacks the monster
-//            monster.takeDamage(playerAttack);
-//
-//            // Check if the monster is defeated
-//            if (monster.isDead()) {
-//                System.out.println("You have defeated the monster!");
-//                currentRoom.setMonster(null);  // Remove the defeated monster from the room
-//            } else {
-//                // Monster counterattacks
-//                int monsterAttack = monster.getMonsterDmg();
-//                setPlayerHP(getPlayerHP() - monsterAttack);
-//
-//                // Check if the player is defeated
-//                if (getPlayerHP() <= 0) {
-//                    System.out.println("You have been defeated by the monster.");
-//                    revivePlayer();  // Revive the player at the spawn room
-//                }
-//            }
-//        } else {
-//            System.out.println("There's no monster to fight in this room.");
-//        }
-//    }
-//
-//    // Calculate the player's attack value based on equipped weapons
-//    //private int calculatePlayerAttack() {
-//       //int totalAttack = 0;
-//
-//        //for (Equippable weapon : equipped) {
-//          //  if (weapon instanceof Weapon) {
-//              //  totalAttack += ((Weapon) weapon).getAtkValue();
-//           // }
-//       // }
-//
-//        return totalAttack;
-//    }
-//
-//    // Calculate the player's attack value based on equipped weapons
-//    private int calculatePlayerAttack() {
-//        int totalAttack = 0;
-//
-//        if (equipped != null) {
-//            for (Equippable equippable : equipped) {
-//                if (equippable instanceof Weapon) {
-//                    totalAttack += ((Weapon) equippable).getAtkValue();
-//                }
-//            }
-//        }
-//
-//        return totalAttack;
-//    }
- 
+    // Action when Player fights Monster
+    // Thu, Andrew
+    public void fightMonster() {
+        if (currentRoom.getMonster() != null) {
+            Monster monster = currentRoom.getMonster();
+            System.out.println("\nGAME ON");
+            System.out.println("Here are commands you can use: ");
+            System.out.println("- Select weapon (1,2,3) \n - Inventory, equip, unequip, use");
+            if (weapons.isEmpty()) {
+            	System.out.println("You don't have any weapons");
+            } else {
+                System.out.println("\nYour list of weapon:");
+                for (int i=0; i < weapons.size(); i++) {
+                	System.out.println(i+1 + "/ " + weapons.get(i).getItemName() + " (" + weapons.get(i).getAtkValue() + ")");
+                }
+            }
+            System.out.println("Please input your command: ");
+            Scanner input = new Scanner(System.in);
+            String answer = input.nextLine();
+            while (monster.getMonsterHP() > 0 && playerHP > 0){
+                if (answer.equalsIgnoreCase("inventory")) {
+                    showInventory();
+                }
+                else if (answer.toLowerCase().contains("equip") && !answer.toLowerCase().contains("unequip")){
+                    String itemName = answer.substring(6,answer.length()); //split item name
+                    equipItem(itemName);
+                }
+                else if (answer.toLowerCase().contains("unequip")){
+                    String itemName = answer.substring(8,answer.length()); //split item name
+                    unequipItem(itemName);
+                }
+                else if (answer.toLowerCase().contains("use")){
+                    String itemName = answer.substring(4,answer.length()); //split item name
+                    useItem(itemName);
+                }
+                else if (answer.equalsIgnoreCase("1") || answer.equalsIgnoreCase("2") || answer.equalsIgnoreCase("3")){
+                	int playerAttack = 0;
+                	if (answer.equalsIgnoreCase("1") && !weapons.isEmpty())
+                		playerAttack = weapons.get(0).getAtkValue();
+                	else if (answer.equalsIgnoreCase("2") && weapons.size() >= 2)
+                		playerAttack = weapons.get(1).getAtkValue();
+                	else if (answer.equalsIgnoreCase("3") && weapons.size() >= 3)
+                		playerAttack = weapons.get(2).getAtkValue();
+                	else playerAttack = 0;
+                	monster.setMonsterHP(monster.getMonsterHP() - playerAttack);
+                	System.out.println("\n~~~~~~~~~~~~~");
+                    System.out.println("You deal " + playerAttack + " damage to " + monster.getMonsterName());
+                    System.out.println(monster.getMonsterName() + "'s HP: " + monster.getMonsterHP());
+                    System.out.println("~~~~~~~~~~~~~");
+                    if (monster.getMonsterHP() <= 0) {
+                        currentRoom.setMonster(null);
+                        System.out.println("Monster is dead. You won!");
+                        break;
+                    }
+                    int dice = (int) ((Math.random() * (monster.getDamageThreshold()*3 - 1)) + 1);
+                    if (dice < monster.getDamageThreshold()) {
+                        setPlayerHP(playerHP - monster.getMonsterDmg() * 2);
+                        System.out.println("Critical hit!");
+                        System.out.println("Monster deals " + monster.getMonsterDmg()*2 + " damage to you.");
+                    }
+                    else {
+                        setPlayerHP(playerHP - monster.getMonsterDmg());
+                        System.out.println("Monster deals " + monster.getMonsterDmg() + " damage to you.");
+                    }
+                    System.out.println(playerName + "'s HP: " + playerHP);
+                    System.out.println("~~~~~~~~~~~~~\n");
+                    if (playerHP <= 0){
+                        System.out.println("You're dead! GAME OVER!");
+                        System.out.println("Press enter to revive at the spawn room or \"exit\" to quit the game.");
+                		String decision = input.nextLine();	
+                		if (decision.equalsIgnoreCase("exit")) {
+                			return;
+                		}
+                		else {
+                			revivePlayer();
+                		}
+                        break;
+                    }
+                } else {
+                    System.out.println("Please enter correct command.");
+                }
+                if (weapons.isEmpty()) {
+                	System.out.println("You don't have any weapons");
+                } else {
+	                System.out.println("\nYour list of weapon:");
+	                for (int i=0; i < weapons.size(); i++) {
+	                	System.out.println(i+1 + "/ " + weapons.get(i).getItemName() + " (" + weapons.get(i).getAtkValue() + ")");
+	                }
+                }
+                System.out.println("Please input your command: ");
+                answer = input.nextLine();
+            }       
+        } else {
+            System.out.println("\nThere's no monster to fight in this room.\n");
+        }
+    }
+    
+    // Display all weapons in inventory
+    // Thu, Andrew
     public void weaponList() {
-	 
+    	if (weapons.isEmpty()) {
+    		System.out.println("\nYou don't have any weapons in your inventory.\n");
+    		return;
+    	}
 	    System.out.println("\nYour list of weapons:");
 	    System.out.println("--------------------------");
-
-	    boolean foundWeapons = false;
-
-	    for (Item item : inventory) {
-	        if (item instanceof Weapon) {
-	            Weapon weapon = (Weapon) item;
+	    Collections.sort(weapons);
+	    for (Weapon weapon : weapons) {
 	            System.out.println("Weapon ID: " + weapon.getItemID());
 	            System.out.println("Weapon Name: " + weapon.getItemName());
 	            System.out.println("Attack Value: " + weapon.getAtkValue());
 	            System.out.println("--------------------------\n");
-	            foundWeapons = true;
-	        }
-	    }
-
-	    if (!foundWeapons) {
-	        System.out.println("You don't have any weapons in your inventory.");
 	    }
 	}
     
-    //Print player's current room information including RoomID, RoomName and RoomDescription
+    // Print player's current room information including RoomID, RoomName and RoomDescription
+    // Thu
     public void displayLocation(){
         System.out.println("\n---------------");
         System.out.println("You are at Room (" + currentRoom.getRoomID() + ") " + currentRoom.getRoomName());
@@ -266,6 +329,8 @@ public class Player {
         System.out.println("---------------\n");
     }
     
+    // Display all commands and their functions
+    // Thu
     public void displayHelpMenu(){
         System.out.println("\n--------------HELP MENU--------------");
         System.out.printf("| %2s %5s %-10s %10s \n", "n/north", "", "Move North","|");
@@ -288,7 +353,8 @@ public class Player {
         System.out.println("-------------------------------------\n");
     }
     
-    //Print items found in the current room
+    // Print items found in the current room
+    // ET
     public void explore() {
     	if (currentRoom.getRoomItems().isEmpty()) {
     		System.out.println("\nNothing but this weird room here.\n");
@@ -301,9 +367,13 @@ public class Player {
     		}
     		System.out.println("----------------------------\n");
     	}
+    	if (currentRoom.getMonster() != null) {
+    		System.out.println("There's an SCP in this room!\n");
+    	}
     }
 
-    //Show non-equipped items currently in inventory
+    // Show non-equipped items currently in inventory
+    // ET
     public void showInventory() {
     	if(inventory.isEmpty()) {
     		System.out.println("\nYou have nothing in your inventory right now.\n");
@@ -318,7 +388,8 @@ public class Player {
     	}
     }
 
-    //Pickup an item in a room
+    // Pickup an item in a room
+    // ET
     public void pickUp(String itemID) {
     	if(currentRoom.getRoomItems().isEmpty()) {
     		System.out.println("\nThere's nothing here to pick up.");
@@ -332,6 +403,8 @@ public class Player {
     				System.out.println();
     				System.out.println("You've pickup up " + item.getItemName() + " and placed it in your inventory.");
     				itemfound = true;
+    				if (item instanceof Weapon)
+    					weapons.add((Weapon) item);
     				break;
     			}
     		}
@@ -342,7 +415,8 @@ public class Player {
     	}
     }
     
-    //Drop an item from an inventory, put item into the room
+    // Drop an item from an inventory, put item into the room
+    // ET
     public void dropItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to drop.");
@@ -353,8 +427,9 @@ public class Player {
     		if(item!=null) {
     				inventory.remove(item);
     				currentRoom.getRoomItems().add(item);
-    				System.out.println();
-    				System.out.println("You've dropped " + item.getItemName() + " on the floor.");
+    				System.out.println("\nYou've dropped " + item.getItemName() + " on the floor.");
+    				if (item instanceof Weapon)
+    					weapons.remove((Weapon) item);
     		}
     		else {
     			System.out.println("\nYou don't have this item.");
@@ -364,6 +439,7 @@ public class Player {
     }
 
     // Display the puzzle in a room
+    // Augustine, ET
     public void playPuzzle () {
     	Scanner input = new Scanner(System.in);
     	if (currentRoom.getPuzzle()!= null) {
@@ -403,6 +479,7 @@ public class Player {
     }
 
     // Inspect an item to see the description
+    // Thu
     public void inspectItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to inspect.");
@@ -421,6 +498,7 @@ public class Player {
     }
     
     // Find an item in inventory based on itemID
+    // Thu
     public Item findItem(String itemID) {
     	for(Item item : inventory) {
 			if(item.getItemID().equals(itemID)) {
@@ -441,6 +519,7 @@ public class Player {
     }
     
     // Remove all key cards in inventory while doing combine
+    // Thu
     public void removeAllKeys(String itemID) {
     	for(int i = 0; i < inventory.size(); i++) {
 			if(inventory.get(i).getItemID().equals(itemID)) {
@@ -451,6 +530,7 @@ public class Player {
     }
     
     // Combine 2 keys to get the higher level key
+    // Thu
     public void combineItem() {
     	if (currentRoom.getRoomID() != 5) {
     		System.out.println("\nYou can only combine items in Room LC-05.\n");
@@ -495,6 +575,7 @@ public class Player {
     }
     
     // Equip an item, moving them from the inventory to the equipment array
+    // ET
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
@@ -514,6 +595,7 @@ public class Player {
     }
     
     // Unequip an item, moving them from the equipment array back to the inventory.
+    // ET
     public void unequipItem(String itemID) {
     	// search inventory
     	Item item = findEquip(itemID);
@@ -532,6 +614,7 @@ public class Player {
     }
     
     // Display a list of items currently equipped.
+    // ET
     public void showEquipped(){
     	if(equipped.isEmpty()) {
     		System.out.println("\nYou have nothing equipped right now.\n");
@@ -552,6 +635,7 @@ public class Player {
     }
     
     // Remove item from inventory array based on item ID
+    // ET
     public void removeFromInventory(String itemID) {
     	for(Item item : inventory) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
@@ -562,6 +646,7 @@ public class Player {
     }
     
     // Remove item from equipped array based on item ID
+    // ET
     public void removeFromEquips(String itemID) {
     	for(Item item : equipped) {
     		if(item.getItemID().equalsIgnoreCase(itemID)) {
@@ -571,6 +656,8 @@ public class Player {
     	}
     }
 
+    // Use a consumable item or key
+    // Thu
     public void useItem(String itemID) {
     	if (inventory.isEmpty()) {
     		System.out.println("\nYou literally have nothing. Pick something up.\n");
@@ -586,6 +673,8 @@ public class Player {
     		return;
     }
     
+    // Use a key to unlock a room
+    // Thu
     public void useKey(Item key) {
     	Room nextRoom = gameMap.getRoom(currentRoom.getRoomID()+1);
     	if (nextRoom.getKeyID().equalsIgnoreCase("0"))

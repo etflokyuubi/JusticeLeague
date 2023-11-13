@@ -84,6 +84,9 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("stats")){
 	                player1.showEquipped();
 	            }
+	            else if (playerInput.equalsIgnoreCase("examine monster")){
+	                player1.inspectMonster();
+	            }
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }

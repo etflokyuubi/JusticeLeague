@@ -1,7 +1,7 @@
 package SCPGame;
 import java.io.*;
 import java.util.*;
-
+//Thu
 
 public class Map {
 	private static final String defaultFile = "Map.txt";

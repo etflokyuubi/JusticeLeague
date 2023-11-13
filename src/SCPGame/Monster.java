@@ -20,29 +20,10 @@ public class Monster {
 		this.monsterDmg = monsterDmg;
 		this.damageThreshold = damageThreshold;
 		this.isDead = false; // Initialize as not dead
-		
 	}
 	
-	public int attack() {
-        int randNumber = new Random().nextInt(100);
-        if (randNumber < damageThreshold) {
-            return monsterDmg * 2; // Double damage if random number is below the threshold
-        }
-        return monsterDmg;
-    }
-
-    public void takeDamage(int damage) {
-        this.monsterHP -= damage;
-        if (this.monsterHP <= 0) {
-            this.monsterHP = 0;
-            this.isDead = true; // Set the monster as dead when HP reaches 0
-        }
-    }
-	
 	//Getter
-    public boolean isDead() {
-        return isDead;
-    }
+    public boolean isDead() { return isDead; }
     
 	public int getInitRoomID() { return initRoomID; }
 	
@@ -53,6 +34,8 @@ public class Monster {
 	public int getMonsterHP() { return monsterHP; }
 
 	public int getMonsterDmg() { return monsterDmg; }
+	
+	public int getDamageThreshold() { return damageThreshold; }
 
 	//Setter
 	public void setInitRoomID(int initRoomID) { this.initRoomID = initRoomID; }
