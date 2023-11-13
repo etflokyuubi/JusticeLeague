@@ -608,7 +608,7 @@ public class Player {
     	}
     }
     
-    public void equipConsumable (String itemID) {
+    public void useConsumable (String itemID) {
         Item item = findItem(itemID);
         if (item != null && item instanceof Consumable) {
             removeFromInventory(itemID);

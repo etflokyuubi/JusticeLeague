@@ -82,7 +82,7 @@ public class Game {
 	            }
 
 	            else if (playerInput.equalsIgnoreCase("heal")) {
-	            	player1.equipConsumable("");
+	            	player1.useConsumable("");
 	            }
 
 	            else if (playerInput.equalsIgnoreCase("examine monster")){
