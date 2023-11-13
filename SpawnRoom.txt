@@ -2,15 +2,15 @@
 You're in your private cell, CD01, located in Zone 1.~
 0~2~4~3~
 
-6~EX-LC~
+2~EX-LC~
 The Light Containment elevator goes up to the Heavy Containment zone. It seems to require a level 01 clearance keycard.~
 5~7~0~0~
 
-12~EX-HC~
+3~EX-HC~
 The Heavy Containment elevator goes up to the Entrance zone. It seems to require a level 03 clearance keycard.~
 0~13~11~0~
 
-18~EX-SZ~
+4~EX-SZ~
 The Entrance Zone elevator goes up to the Surface Zone. It seems to require a level 04 clearance keycard.~
 17~0~19~0~
 
