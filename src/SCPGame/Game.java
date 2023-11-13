@@ -5,9 +5,6 @@ import java.util.*;
 public class Game {
 	private Scanner input = new Scanner(System.in);
     Player player1;
-    Player playerSave;
-    Map gameMap;
-    Map mapSave;
 	public static void main(String[] args) {
 		Game game = new Game();
         game.start();
@@ -16,7 +13,7 @@ public class Game {
 	public void start(){
         System.out.println("Welcome to SCP Imminent Danger! Please type your name:");
         String playerName = input.nextLine();
-        gameMap = new Map();
+        Map gameMap = new Map();
         player1 = new Player(playerName,gameMap);
     }
 	
@@ -76,22 +73,24 @@ public class Game {
 	            	String itemId = playerInput.substring(8, playerInput.length());
 	                player1.unequipItem(itemId);
 	            }
-	            else if (playerInput.contains("equip") && !playerInput.contains("unequip")){
+	            else if (playerInput.contains("equip")){
 	            	String itemId = playerInput.substring(6, playerInput.length());
 	                player1.equipItem(itemId);
-	            }
-	            else if (playerInput.contains("use")){
-	            	String itemId = playerInput.substring(4, playerInput.length());
-	                player1.useItem(itemId);
 	            }
 	            else if (playerInput.equalsIgnoreCase("stats")){
 	                player1.showEquipped();
 	            }
+
+	            else if (playerInput.equalsIgnoreCase("heal")) {
+	            	player1.equipConsumable("");
+	            }
+
 	            else if (playerInput.equalsIgnoreCase("examine monster")){
 	                player1.inspectMonster();
 	            }
 	            else if (playerInput.equalsIgnoreCase("info")){
 	                player1.showInfo();
+
 
 	            }
 	            else{
@@ -103,7 +102,10 @@ public class Game {
 	            playerInput = input.nextLine();
 	        }
 	        System.out.println("Bye " + player1.getPlayerName() + " ~ Thank you for playing our game!");
-	 }
+	 
+
 	 
 	
 }
+}
+	 
