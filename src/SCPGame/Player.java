@@ -314,55 +314,40 @@ public class Player {
     public void playPuzzle () {
     	
     	Scanner input = new Scanner(System.in);
-    	
-    	if (  currentRoom.getPuzzle()!= null) {
-    		System.out.println("Hey you have a puzzle to solve!");
-    		int numAttempts = currentRoom.getPuzzle().getAttempts();
-    		while (numAttempts > 0 ) {
-    			System.out.println(currentRoom.getPuzzle().getQuestion());
-    			String answer = input.nextLine();
-    			if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
-    				System.out.println();
-    				System.out.println("You solved the puzzle!");
-    				System.out.println();
-    				currentRoom.setPuzzle(null);
-    				break;
-    			}
-    			else if (answer.equalsIgnoreCase("hint")) {
-    				System.out.println(currentRoom.getPuzzle().getHint());
-    			}
-    			else {
-    				numAttempts--;
-<<<<<<< HEAD
-    				
-    				System.out.println("You answered incorrectly.");
-    				
-    			}
-    		}
-    		    if (numAttempts == 0) {
-    			System.out.println("You failed the puzzle. You took damage");
-    			this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg() );
-    			System.out.println("Current Health: " + this.getPlayerHP());
-    			
-    			
-=======
-    				if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
-    					this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
-    					System.out.println();
-    					System.out.println("You answered incorrectly. You took damage.");
-    					System.out.println();
-    				}
-    				
-    			}
-    		}
-    		if (numAttempts == 0) {
-    			System.out.println();
-    			System.out.println("You failed the puzzle.");
-    			System.out.println();
->>>>>>> 2ffe61808854ccc8ace260d698fc935badcc93a6
-    		}
-    	}
+
+        if (currentRoom.getPuzzle()!= null) {
+            System.out.println("Hey you have a puzzle to solve!");
+            int numAttempts = currentRoom.getPuzzle().getAttempts();
+            while (numAttempts > 0 ) {
+                System.out.println(currentRoom.getPuzzle().getQuestion());
+                String answer = input.nextLine();
+                if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
+                    System.out.println();
+                    System.out.println("You solved the puzzle!");
+                    System.out.println();
+                    currentRoom.setPuzzle(null);
+                    break;
+                }
+                else {
+                    numAttempts--;
+                    if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
+                        this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
+                        System.out.println();
+                        System.out.println("You answered incorrectly. You took damage.");
+                        System.out.println();
+                    }
+
+                }
+            }
+            if (numAttempts == 0) {
+                System.out.println();
+                System.out.println("You failed the puzzle.");
+                System.out.println();
+            }
+        }
     }
+
+
 
     //Inspect item
     public void inspectItem(String itemID) {
@@ -479,6 +464,25 @@ public class Player {
     		System.out.println();
     		System.out.println("This item was not found in your inventory.\n");
     	}
+    }
+    
+    public void equipConsumable (String itemID) {
+        Item item = findItem(itemID);
+        if (item != null && item instanceof Consumable) {
+            removeFromInventory(itemID);
+            System.out.println("You've successfully consumed " + item.getItemName() + ".");
+            setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());
+            System.out.println("Current HP: " + getPlayerHP());
+
+            System.out.println();
+
+        } else if (!(item instanceof Consumable)) {
+            System.out.println();
+            System.out.println("This is not a consumable item.\n");
+        } else {
+            System.out.println();
+            System.out.println("This item was not found in your inventory.\n");
+        }
     }
     
     // Unequip an item, moving them from the equipment array back to the inventory.
