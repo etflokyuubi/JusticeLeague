@@ -80,6 +80,9 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("stats")){
 	                player1.showEquipped();
 	            }
+	            else if (playerInput.equalsIgnoreCase("heal")) {
+	            	player1.equipConsumable("");
+	            }
 	            else{
 	                System.out.println("Please enter correct command.");
 	            }
