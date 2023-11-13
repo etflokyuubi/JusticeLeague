@@ -121,11 +121,12 @@ public class Player {
     }
     
     // Move player to Spawn Room
-    // Andrew
-    public void spawnRoom(Room room) {
-        setCurrentRoom(room);
-        System.out.println("You are now in the spawn room.");
-        displayLocation();   
+    // Thu
+    public void checkSpawnRoom() {
+        for (Room room : gameMap.spawnRooms) {
+        	if (currentRoom.getRoomID() == room.getRoomID())
+        		setSpawnRoom(room);
+        }
     }
     
     // Revive player to Spawn Room
@@ -174,6 +175,7 @@ public class Player {
     			revivePlayer();
     		}
     	} else {
+    		checkSpawnRoom();
     		displayLocation();
     		playPuzzle();
     	}
@@ -218,7 +220,7 @@ public class Player {
             Monster monster = currentRoom.getMonster();
             System.out.println("\nGAME ON");
             System.out.println("Here are commands you can use: ");
-            System.out.println("- Select weapon (1,2,3) \n - Inventory, equip, unequip, use");
+            System.out.println("- Select weapon (1,2,3) \n- Inventory, equip, unequip, use");
             if (weapons.isEmpty()) {
             	System.out.println("You don't have any weapons");
             } else {
@@ -254,7 +256,10 @@ public class Player {
                 		playerAttack = weapons.get(1).getAtkValue();
                 	else if (answer.equalsIgnoreCase("3") && weapons.size() >= 3)
                 		playerAttack = weapons.get(2).getAtkValue();
-                	else playerAttack = 0;
+                	else {
+                		System.out.println("You don't have this weapon!");
+                		playerAttack = 0;
+                	}
                 	monster.setMonsterHP(monster.getMonsterHP() - playerAttack);
                 	System.out.println("\n~~~~~~~~~~~~~");
                     System.out.println("You deal " + playerAttack + " damage to " + monster.getMonsterName());
@@ -701,9 +706,8 @@ public class Player {
     	}
     }
     
-    
-
-    //show player currentHP and maxhp
+    // Show player currentHP and maxHP
+    // ET
     public void showInfo() {
     	System.out.println();
     	System.out.println("Here's how we're lookin:");

@@ -9,7 +9,6 @@ public class Monster {
 	private int monsterHP;
 	private int monsterDmg;
 	private int damageThreshold; // Threshold for double damage
-	private boolean isDead;
 	
 	public Monster(int initRoomID, String monsterID, String monsterName, int monsterHP, int monsterDmg, int damageThreshold) {
 		super();
@@ -19,12 +18,9 @@ public class Monster {
 		this.monsterHP = monsterHP;
 		this.monsterDmg = monsterDmg;
 		this.damageThreshold = damageThreshold;
-		this.isDead = false; // Initialize as not dead
 	}
 	
-	//Getter
-    public boolean isDead() { return isDead; }
-    
+	//Getter    
 	public int getInitRoomID() { return initRoomID; }
 	
 	public String getMonsterID() { return monsterID; }
