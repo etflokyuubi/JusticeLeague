@@ -44,7 +44,7 @@ public class Monster {
 
 	public void setMonsterName(String monsterName) { this.monsterName = monsterName; }
 
-	public void setMonsterHP(int monsterHP) { this.monsterHP = monsterHP; }
+	public void setMonsterHP(int monsterHP) { if(monsterHP > 0) { this.monsterHP = monsterHP; } else { this.monsterHP = 0; } }
 
 	public void setMonsterDmg(int monsterDmg) { this.monsterDmg = monsterDmg; }
 

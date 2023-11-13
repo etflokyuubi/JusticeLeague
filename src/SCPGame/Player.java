@@ -705,10 +705,12 @@ public class Player {
 
     //show player currentHP and maxhp
     public void showInfo() {
+    	System.out.println();
     	System.out.println("Here's how we're lookin:");
     	System.out.println("---------------------");
     	System.out.println("HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
     	System.out.println("---------------------");
+    	System.out.println();
     }
 }
     
