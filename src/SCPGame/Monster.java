@@ -1,8 +1,9 @@
 package SCPGame;
 
-import java.util.Random;
+import java.io.Serializable;
 
-public class Monster {
+public class Monster implements Serializable {
+	private static final long serialVersionUID = 1234L;
 	private int initRoomID;
 	private String monsterID;
 	private String monsterName;

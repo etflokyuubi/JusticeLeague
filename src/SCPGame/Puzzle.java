@@ -1,6 +1,9 @@
 package SCPGame;
 
-public class Puzzle {
+import java.io.Serializable;
+
+public class Puzzle implements Serializable {
+	private static final long serialVersionUID = 1234L;
 	private int initRoomID;
 	private int puzzleID;
 	private String puzzleName;

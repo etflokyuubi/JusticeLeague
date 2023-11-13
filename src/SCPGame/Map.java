@@ -3,7 +3,8 @@ import java.io.*;
 import java.util.*;
 //Thu
 
-public class Map {
+public class Map implements Serializable{
+	private static final long serialVersionUID = 1234L;
 	private static final String defaultFile = "Map.txt";
     ArrayList<Room> myMap = new ArrayList<>();
     ArrayList<Item> itemList = new ArrayList<>();

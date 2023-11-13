@@ -1,6 +1,9 @@
 package SCPGame;
 
-public class Item implements Comparable <Item>{
+import java.io.Serializable;
+
+public class Item implements Serializable, Comparable <Item>{
+	private static final long serialVersionUID = 1234L;
 	private int initRoomID;
 	private String itemID;
 	private String itemName;

@@ -1,8 +1,10 @@
 package SCPGame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Room {
+public class Room implements Serializable {
+	private static final long serialVersionUID = 1234L;
 	private int roomID;
 	private String roomName;
 	private String roomDescription;

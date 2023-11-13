@@ -1,8 +1,10 @@
 package SCPGame;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Player {
+public class Player implements Serializable{
+	private static final long serialVersionUID = 1234L;
 	private String playerName;
 	private Map gameMap;
 	private Room currentRoom;
