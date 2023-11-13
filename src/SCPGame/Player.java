@@ -628,13 +628,16 @@ public class Player {
             removeFromInventory(itemID);
             System.out.println("\nYou've successfully use " + item.getItemName() + ".");
             if (playerHP == playerMaxHP) {
-            	System.out.println("You are at full HP\nYou just waste 1 " + item.getItemName() + ".");
+            	System.out.println("You are at full HP\nYou just wasted 1 " + item.getItemName() + ".");
             }
-            else if (getPlayerHP() + ((Consumable) item).getHpValue() > playerMaxHP)
+            else if (getPlayerHP() + ((Consumable) item).getHpValue() > playerMaxHP) {
                 System.out.println("You healed " + (playerMaxHP - playerHP));
-            else
+                setPlayerHP(getPlayerMaxHP());
+            }
+            else {
                 System.out.println("You healed " + ((Consumable) item).getHpValue());
-            setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
+                setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());     
+            }
             System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
             System.out.println();
         } else if (!(item instanceof Consumable)) {
