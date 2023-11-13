@@ -8,6 +8,7 @@ public class Player {
 	private Room currentRoom;
 	private Room spawnRoom;
 	private int playerHP;
+	private int playerMaxHP;
 	
 	private ArrayList<Item> inventory = new ArrayList<>();
 	private ArrayList<Equippable> equipped = new ArrayList<>();
@@ -22,6 +23,7 @@ public class Player {
 	     this.spawnRoom = currentRoom;
 	     currentRoom.setVisited(true);
 	     this.playerHP = 100;
+	     this.playerMaxHP = 100;
 	}
 	
 	// Getter
@@ -33,6 +35,8 @@ public class Player {
 	
 	public int getPlayerHP() { return playerHP; }
 	
+	public int getPlayerMaxHP() { return playerMaxHP; }
+	
 	public ArrayList<Item> getInventory() { return inventory; }
 	
 	public ArrayList<Equippable> getEquipped() { return equipped; }
@@ -43,6 +47,8 @@ public class Player {
 	public void setSpawnRoom(Room spawnRoom) { this.spawnRoom = spawnRoom; }
 
 	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
+	
+	public void setPlayerMaxHP(int playerMaxHP) { this.playerMaxHP = playerMaxHP; }
 	
 	public boolean checkKey() {
 		return (currentRoom.getKeyID().equals("0"));
@@ -579,6 +585,7 @@ public class Player {
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
+    	Equippable equip = (Equippable)item;
     	
     	// if an item is found in the inventory, place it in the equipment array
     	if (inventory.isEmpty()) {
@@ -586,6 +593,9 @@ public class Player {
     	} else if(item != null && item instanceof Equippable) {
     		removeFromInventory(itemID);
     		equipped.add((Equippable) item);
+    		if(equip.getHpValue() != 0){
+    			setPlayerMaxHP(getPlayerMaxHP() + equip.getHpValue());
+    		}
     		System.out.println("\nYou've successfully equipped " + item.getItemName() + ".\n");
     	} else if( !(item instanceof Equippable) ) {
     		System.out.println("\nThis is not an equippable item.\n");
@@ -599,7 +609,7 @@ public class Player {
     public void unequipItem(String itemID) {
     	// search inventory
     	Item item = findEquip(itemID);
-    	
+    	Equippable equip = (Equippable)item;
     	// if an item is found in the inventory, place it in the equipment array
     	if (equipped.isEmpty()) {
     		System.out.println("\nThere's nothing on you to remove.\n");
@@ -607,6 +617,12 @@ public class Player {
     	} else if(item != null) {
     		removeFromEquips(itemID);
     		inventory.add((Equippable) item);
+    		if(equip.getHpValue() != 0){
+    			setPlayerMaxHP(getPlayerMaxHP() - equip.getHpValue());
+    			if(getPlayerHP() >= getPlayerMaxHP()) {
+    				setPlayerHP(getPlayerMaxHP());
+    			}
+    		}
     		System.out.println("\nYou've successfully unequipped " + item.getItemName() + ".\n");
     	} else {
     		System.out.println("\nYou don't have this item on you.\n");
@@ -684,7 +700,16 @@ public class Player {
     		System.out.println("\nYou have successfully unlock the next room!\n");
     	}
     }
+    
+    
 
+    //show player currentHP and maxhp
+    public void showInfo() {
+    	System.out.println("Here's how we're lookin:");
+    	System.out.println("---------------------");
+    	System.out.println("HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
+    	System.out.println("---------------------");
+    }
 }
     
 

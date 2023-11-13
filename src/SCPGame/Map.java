@@ -11,6 +11,7 @@ public class Map {
     ArrayList<Monster> monsterList = new ArrayList<>();
     ArrayList<Item> combineItem = new ArrayList<>();
     ArrayList<Equippable> requiredItem = new ArrayList<>();
+    ArrayList<Room> spawnRooms = new ArrayList<>();   
     
     public Map() {
         loadRoom();
@@ -19,7 +20,7 @@ public class Map {
         //System.out.println(myMap);
 
         loadItem();
-        
+         
         //Place items into rooms
         for (Item i : itemList) {
             myMap.get(i.getInitRoomID() - 1).addItem(i);
@@ -77,6 +78,20 @@ public class Map {
             scan.close();
             
         } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    //Loads SpawnRooms
+    private void loadSpawnRooms() {
+        try {
+            Scanner scan = new Scanner(new File("SpawnRooms.txt"));
+            while (scan.hasNext()) {
+                int spawnRoomID = scan.nextInt();
+                Room spawnRoom = getRoom(spawnRoomID);
+                spawnRooms.add(spawnRoom);
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -198,11 +213,15 @@ public class Map {
     public int getNumberOfRooms(){return myMap.size();} //total rooms
 
     public ArrayList<Item> getCombineItem() { return combineItem; }
+    
+    public ArrayList<Room> getSpawnRooms() {return spawnRooms;}
+         
+    
 
 	@Override
     public String toString() {
         return "Map{" +
-                "MyMap=" + myMap +
+                "MyMap=" + myMap +", spawnRooms=" + spawnRooms +
                 '}';
     }
 }
