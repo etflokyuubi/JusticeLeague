@@ -602,12 +602,12 @@ public class Player {
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
-    	Equippable equip = (Equippable)item;
     	
     	// if an item is found in the inventory, place it in the equipment array
     	if (inventory.isEmpty()) {
     		System.out.println("\nYou literally have nothing. Pick something up.\n");
     	} else if(item != null && item instanceof Equippable) {
+    		Equippable equip = (Equippable)item;
     		removeFromInventory(itemID);
     		equipped.add((Equippable) item);
     		if(equip.getHpValue() != 0){
