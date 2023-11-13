@@ -53,6 +53,8 @@ public class Map {
         }
         //Uncomment the next line to see combine items' info
         //System.out.println(combineItem);
+        
+        loadSpawnRooms();
     }
 
     //Load all rooms
@@ -84,11 +86,10 @@ public class Map {
     //Loads SpawnRooms
     private void loadSpawnRooms() {
         try {
-            Scanner scan = new Scanner(new File("SpawnRooms.txt"));
+            Scanner scan = new Scanner(new File("SpawnRoom.txt"));
             while (scan.hasNext()) {
                 int spawnRoomID = scan.nextInt();
-                Room spawnRoom = getRoom(spawnRoomID);
-                spawnRooms.add(spawnRoom);
+                spawnRooms.add(myMap.get(spawnRoomID));
             }
             scan.close();
         } catch (FileNotFoundException e) {
