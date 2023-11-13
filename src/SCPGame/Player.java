@@ -611,6 +611,8 @@ public class Player {
     		System.out.println("\nYou have successfully unlock the next room!\n");
     	}
     }
+    
+    
 
     //show player currentHP and maxhp
     public void showInfo() {
