@@ -46,7 +46,17 @@ public class Player {
 
 	public void setSpawnRoom(Room spawnRoom) { this.spawnRoom = spawnRoom; }
 
-	public void setPlayerHP(int playerHP) { if(playerHP > 0) { this.playerHP = playerHP;} else { this.playerHP = 0; }}
+	public void setPlayerHP(int playerHP) {
+		if (playerHP > playerMaxHP) {
+			this.playerHP = playerMaxHP;
+			return;
+		}
+		if (playerHP <= 0) {
+			this.playerHP = 0;
+			return;
+		}
+		this.playerHP = playerHP;
+	}
 	
 	public void setPlayerMaxHP(int playerMaxHP) { this.playerMaxHP = playerMaxHP; }
 	
@@ -300,7 +310,7 @@ public class Player {
                 if (weapons.isEmpty()) {
                 	System.out.println("You don't have any weapons");
                 } else {
-	                System.out.println("\nYour list of weapon:");
+	                System.out.println("Your list of weapon:");
 	                for (int i=0; i < weapons.size(); i++) {
 	                	System.out.println(i+1 + "/ " + weapons.get(i).getItemName() + " (" + weapons.get(i).getAtkValue() + ")");
 	                }
@@ -343,25 +353,28 @@ public class Player {
     // Display all commands and their functions
     // Thu
     public void displayHelpMenu(){
-        System.out.println("\n--------------HELP MENU--------------");
-        System.out.printf("| %2s %5s %-10s %10s \n", "n/north", "", "Move North","|");
-        System.out.printf("| %2s %6s %-10s %10s \n", "e/east","","Move East","|");
-        System.out.printf("| %2s %5s %-13s %7s \n", "s/south","", "Move South","|");
-        System.out.printf("| %2s %6s %-13s %7s \n", "w/west","","Move West","|");
-        System.out.printf("| %2s %5s %-13s %6s \n", "explore","","Explore a room","|");
-        System.out.printf("| %2s %3s %-10s %5s \n", "inventory","", "Check inventory","|");
-        System.out.printf("| %2s %6s %-10s %8s \n", "pickup","","Pick up item","|");
-        System.out.printf("| %2s %8s %-10s %10s \n", "drop","","Drop item","|");
-        System.out.printf("| %2s %5s %-13s %7s \n", "inspect","","Inspect item","|");
-        System.out.printf("| %2s %7s %-13s %7s \n", "equip","","Equip item","|");
-        System.out.printf("| %2s %5s %-13s %7s \n", "unequip","","Unequip item","|");
-        System.out.printf("| %2s %9s %-10s %10s \n", "use","","Use item","|");
-        System.out.printf("| %2s %6s %-10s %5s \n", "attack","","Fight a monster","|");
-        System.out.printf("| %2s %4s %-10s %6s \n", "location","","Check location","|");
-        System.out.printf("| %2s %7s %-10s %6s \n", "stats","","Check HP & ATK","|");
-        System.out.printf("| %2s %9s %-10s %7s \n", "map","","Check the map","|");
-        System.out.printf("| %2s %8s %-10s %10s \n", "help","","Help menu","|");
-        System.out.println("-------------------------------------\n");
+    	   System.out.println("\n--------------HELP MENU--------------");
+           System.out.printf("| %2s %5s %-10s %10s \n", "n/north", "", "Move North","|");
+           System.out.printf("| %2s %6s %-10s %10s \n", "e/east","","Move East","|");
+           System.out.printf("| %2s %5s %-13s %7s \n", "s/south","", "Move South","|");
+           System.out.printf("| %2s %6s %-13s %7s \n", "w/west","","Move West","|");
+           System.out.printf("| %2s %5s %-13s %6s \n", "explore","","Explore a room","|");
+           System.out.printf("| %2s %3s %-10s %5s \n", "inventory","", "Check inventory","|");
+           System.out.printf("| %2s %6s %-10s %8s \n", "pickup","","Pick up item","|");
+           System.out.printf("| %2s %8s %-10s %10s \n", "drop","","Drop item","|");
+           System.out.printf("| %2s %5s %-13s %7s \n", "inspect","","Inspect item","|");
+           System.out.printf("| %2s %7s %-13s %7s \n", "equip","","Equip item","|");
+           System.out.printf("| %2s %5s %-13s %7s \n", "unequip","","Unequip item","|");
+           System.out.printf("| %2s %9s %-10s %10s \n", "use","","Use item","|");
+           System.out.printf("| %2s %2s %-10s %5s \n", "ex monster","","Examine monster","|");
+           System.out.printf("| %2s %7s %-10s %5s \n", "fight","","Fight a monster","|");
+           System.out.printf("| %2s %6s %-10s %1s \n", "ignore","","Skip monster/puzzle","|");
+           System.out.printf("| %2s %4s %-10s %6s \n", "location","","Check location","|");
+           System.out.printf("| %2s %7s %-10s %5s \n", "stats","","Check equipment","|");
+           System.out.printf("| %2s %8s %-10s %5s \n", "info","","Check player HP","|");
+           System.out.printf("| %2s %9s %-10s %7s \n", "map","","Check the map","|");
+           System.out.printf("| %2s %8s %-10s %10s \n", "help","","Help menu","|");
+           System.out.println("-------------------------------------\n");
     }
     
     // Print items found in the current room
@@ -487,14 +500,8 @@ public class Player {
         }
     }
 
-
-
-
-   
-
-
+    // Inspect an item to see description
     // Thu
-
     public void inspectItem(String itemID) {
     	if(inventory.isEmpty()) {
     		System.out.println("\nThere's nothing to inspect.");
@@ -524,6 +531,7 @@ public class Player {
     }
     
     // Find an item in equipped based on itemID
+    // ET
     public Item findEquip(String itemID) {
     	for(Item item : equipped) {
 			if(item.getItemID().equals(itemID)) {
@@ -613,16 +621,23 @@ public class Player {
     	}
     }
     
-    public void equipConsumable (String itemID) {
+    // Use a consumable item
+    // Augustine, Thu
+    public void useConsumable (String itemID) {
         Item item = findItem(itemID);
         if (item != null && item instanceof Consumable) {
             removeFromInventory(itemID);
-            System.out.println("You've successfully consumed " + item.getItemName() + ".");
-            setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());
-            System.out.println("Current HP: " + getPlayerHP());
-
+            System.out.println("\nYou've successfully use " + item.getItemName() + ".");
+            if (playerHP == playerMaxHP) {
+            	System.out.println("You are at full HP\nYou just waste 1 " + item.getItemName() + ".");
+            }
+            else if (getPlayerHP() + ((Consumable) item).getHpValue() > playerMaxHP)
+                System.out.println("You healed " + (playerMaxHP - playerHP));
+            else
+                System.out.println("You healed " + ((Consumable) item).getHpValue());
+            setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
+            System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
             System.out.println();
-
         } else if (!(item instanceof Consumable)) {
             System.out.println();
             System.out.println("This is not a consumable item.\n");
@@ -710,11 +725,12 @@ public class Player {
     	Item item = findItem(itemID);
     	if (item == null) {
     		System.out.println("\nYou don't have this item in your inventory.\n");
+    		return;
     	}
-    	else if (!(item instanceof Consumable) && item.getItemType().equalsIgnoreCase("Key Item")) {
+    	if (!(item instanceof Consumable) && item.getItemType().equalsIgnoreCase("Key Item")) {
     		useKey(item);
     	} else
-    		return;
+    		useConsumable(itemID);
     }
     
     // Use a key to unlock a room

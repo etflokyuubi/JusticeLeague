@@ -80,18 +80,15 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("stats")){
 	                player1.showEquipped();
 	            }
-
-	            else if (playerInput.equalsIgnoreCase("heal")) {
-	            	player1.equipConsumable("");
+	            else if (playerInput.contains("use")) {
+	            	String itemId = playerInput.substring(4, playerInput.length());
+	            	player1.useItem(itemId);
 	            }
-
-	            else if (playerInput.equalsIgnoreCase("examine monster")){
+	            else if (playerInput.equalsIgnoreCase("ex monster")){
 	                player1.inspectMonster();
 	            }
 	            else if (playerInput.equalsIgnoreCase("info")){
 	                player1.showInfo();
-
-
 	            }
 	            else{
 	                System.out.println("Please enter correct command.");
@@ -102,10 +99,6 @@ public class Game {
 	            playerInput = input.nextLine();
 	        }
 	        System.out.println("Bye " + player1.getPlayerName() + " ~ Thank you for playing our game!");
-	 
-
-	 
-	
-}
+	 }
 }
 	 
