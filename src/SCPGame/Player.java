@@ -46,7 +46,7 @@ public class Player {
 
 	public void setSpawnRoom(Room spawnRoom) { this.spawnRoom = spawnRoom; }
 
-	public void setPlayerHP(int playerHP) { this.playerHP = playerHP; }
+	public void setPlayerHP(int playerHP) { if(playerHP > 0) { this.playerHP = playerHP;} else { this.playerHP = 0; }}
 	
 	public void setPlayerMaxHP(int playerMaxHP) { this.playerMaxHP = playerMaxHP; }
 	
