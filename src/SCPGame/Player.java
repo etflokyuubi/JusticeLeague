@@ -463,39 +463,38 @@ public class Player {
     }
 
     // Display the puzzle in a room
-    // Augustine, ET
+    // Augustine, ET, Thu
     public void playPuzzle () {
     	Scanner input = new Scanner(System.in);
-
-
         if (currentRoom.getPuzzle()!= null) {
             System.out.println("Hey you have a puzzle to solve!");
             int numAttempts = currentRoom.getPuzzle().getAttempts();
             while (numAttempts > 0 ) {
                 System.out.println(currentRoom.getPuzzle().getQuestion());
                 String answer = input.nextLine();
+                if (answer.equalsIgnoreCase("hint")) {
+                	System.out.println("\nHint:");
+                	System.out.println(currentRoom.getPuzzle().getHint() + "\n");
+                	continue;
+                }
                 if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
-                    System.out.println();
-                    System.out.println("You solved the puzzle!");
-                    System.out.println();
+                    System.out.println("\nYou solved the puzzle!\n");
                     currentRoom.setPuzzle(null);
                     break;
                 }
                 else {
+                	System.out.println("\nYou answered incorrectly! You have " + numAttempts + " left.\n");
                     numAttempts--;
-                    if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
-                        this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
-                        System.out.println();
-                        System.out.println("You answered incorrectly. You took damage.");
-                        System.out.println();
-                    }
-
                 }
             }
             if (numAttempts == 0) {
-                System.out.println();
-                System.out.println("You failed the puzzle.");
-                System.out.println();
+                System.out.println("\nYou failed the puzzle.\n");
+                if (currentRoom.getPuzzle().getPuzzleDmg()!=0) {
+                    this.setPlayerHP(this.getPlayerHP() - currentRoom.getPuzzle().getPuzzleDmg());
+                    System.out.println("\nYou took damage.\n");
+                    if (playerHP <= 0)
+                    	revivePlayer();
+                }
             }
         }
     }

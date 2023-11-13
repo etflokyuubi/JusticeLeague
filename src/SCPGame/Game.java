@@ -45,7 +45,7 @@ public class Game {
 	            else if (playerInput.equalsIgnoreCase("inventory")){
 	                player1.showInventory();
 	            }
-	            else if (playerInput.contains("pickup")){
+	            else if (playerInput.contains("pickup") && !playerInput.equalsIgnoreCase("pickup")){
 	            	String itemId = playerInput.substring(7, playerInput.length());
 	                player1.pickUp(itemId);
 	            }
