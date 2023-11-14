@@ -1,57 +1,56 @@
-SCP Escape Game - README
+# SCP Escape Game - README
 Welcome to the SCP Escape Game! In this text-based adventure, your goal is to navigate through the four floors of the SCP Foundation, solve puzzles, and escape safely. Below, you'll find information on commands, floor details, puzzles, and more.
-----------------------------------------------------------------------------------------------------
-Commands in SCP Escape Game
-Movement Commands:
-North (N): Move the player character north and enter the new room.
-East (E): Move the player character east and enter the new room.
-South (S): Move the player character south and enter the new room.
-West (W): Move the player character west and enter the new room.
---------------------------------------------------------------------------------------------
-Exploration Commands:
-Explore: Investigate the current room for any hidden details or clues.
-Inventory Commands:
-Inventory: Display the contents of the player's inventory.
-Pickup [Item]: Collect an item from the current room.
-Drop [Item]: Remove an item from the player's inventory.
-Inspect [Item]: Examine an item in the player's inventory or the current room.
-Combine: Combine two keycards in SCP-914 room to upgrade clearance level.
-Unequip [Item]: Remove an equipped item from the player's inventory.
-Equip [Item]: Equip an item from the player's inventory.
-Use [Item]: Interact with doors, items, the elevator, and control switch.
------------------------------------------------------------------------------------------------
-Player Information Commands:
-Help: Display the game's help menu.
-Location: Show the current location of the player.
-Weapon: List the weapons available to the player.
-Stats: Display the currently equipped items.
-Monster Interaction Commands:
-Ex Monster: Inspect and gather information about monsters in the current room.
-Game Progression Commands:
-Info: Display general information about the game.
-Save: Save the current game progress to a file.
-Load: Load a previously saved game state from a file.
-Exit: Quit the game without saving.
--------------------------------------------------------------------------------------------------------
- File Structure:
-1.Game.java: This contains the main logic of the game.
-2.Consumable.java: Represents consumable items in the game.
-3.Equippable.java: Represents equippable items in the game, extending the Item class.
-4.Item.java: Represents a generic item in the game.
-5.Weapon.java: Represents weapons in the game, extending the Item class.
-6.Monster.java: Represents monsters in the game.
-7.Player.java: Represents the player character in the game.
-8.Puzzle.java: Represents puzzles in the game.
-9.Room.java: Represents rooms in the game.
-10.Map.java: Represents the game map.
-11.Map.txt: This file contains the data for each room. Each map has an ID, name, and description. The game reads this file to initialize the rooms.
-12.SpawnRoom.txt:Room data file for the spawn room. Contains spawnID,roomID, name, and description. 
-13.Monster.txt:this file for defining monster attributes and behaviors and stats.
-14.Puzzle.txt:this file for defining puzzle attributes and solutions. 
-15.CombineRequired.txt: This file allows what item can be combine to to progress in the game.
--------------------------------------------------------------------------------------------------------
 
-Puzzles in SCP Escape Game:
+# Commands in SCP Escape Game
+## Movement Commands:
+- North (N): Move the player character north and enter the new room.
+- East (E): Move the player character east and enter the new room.
+- South (S): Move the player character south and enter the new room.
+- West (W): Move the player character west and enter the new room.
+
+## Exploration Commands:
+- Explore: Investigate the current room for any hidden details or clues.
+- Inventory Commands:
+  - Inventory: Display the contents of the player's inventory.
+  - Pickup [Item]: Collect an item from the current room.
+  - Drop [Item]: Remove an item from the player's inventory.
+  - Inspect [Item]: Examine an item in the player's inventory or the current room.
+  - Combine: Combine two keycards in SCP-914 room to upgrade clearance level.
+  - Unequip [Item]: Remove an equipped item from the player's inventory.
+  - Equip [Item]: Equip an item from the player's inventory.
+  - Use [Item]: Interact with doors, items, the elevator, and control switch.
+
+## Player Information Commands:
+- Help: Display the game's help menu.
+- Location: Show the current location of the player.
+- Weapon: List the weapons available to the player.
+- Stats: Display the currently equipped items.
+- Monster Interaction Commands:
+- Ex Monster: Inspect and gather information about monsters in the current room.
+- Game Progression Commands:
+- Info: Display general information about the game.
+- Save: Save the current game progress to a file.
+- Load: Load a previously saved game state from a file.
+- Exit: Quit the game without saving.
+
+## File Structure:
+1. Game.java: This contains the main logic of the game.
+2. Consumable.java: Represents consumable items in the game.
+3. Equippable.java: Represents equippable items in the game, extending the Item class.
+4. Item.java: Represents a generic item in the game.
+5. Weapon.java: Represents weapons in the game, extending the Item class.
+6. Monster.java: Represents monsters in the game.
+7. Player.java: Represents the player character in the game.
+8. Puzzle.java: Represents puzzles in the game.
+9. Room.java: Represents rooms in the game.
+10. Map.java: Represents the game map.
+11. Map.txt: This file contains the data for each room. Each map has an ID, name, and description. The game reads this file to initialize the rooms.
+12. SpawnRoom.txt:Room data file for the spawn room. Contains spawnID,roomID, name, and description. 
+13. Monster.txt:this file for defining monster attributes and behaviors and stats.
+14. Puzzle.txt:this file for defining puzzle attributes and solutions. 
+15. CombineRequired.txt: This file allows what item can be combine to to progress in the game.
+
+## Puzzles in SCP Escape Game:
 1. The Locker (LC-#00):
 Description: A locker with a combination lock and a note nearby. The note instructs that the combination is related to the designations of SCP documents on the current level.
 Solution: Examine SCP documents on the current level, find the SCP designation mentioned in the note, and use it as the combination.
@@ -96,8 +95,8 @@ Outcome: Successfully distracting SCP-939 and reaching the next room.
 Description: Use the SCP numbers from the last 3 encounters and add them up. The prompt suggests using the sum as a code to access Room 5 on the fourth floor.
 Solution: Add the SCP numbers from the last 3 encounters.
 Outcome: Deactivating the nuclear device and accessing Room 5 on the fourth floor.
---------------------------------------------------------------------------------------------------------
-SCP Escape Game Map and Room Descriptions
+
+## SCP Escape Game Map and Room Descriptions
 1. LC-CD-01 (Spawn Room):
 Description: Private cell in Zone 1.
 Connections: Leads to LC-#00.
@@ -167,6 +166,5 @@ Connections: Leads to SZ-05.
 23. SZ-05:
 Description: Heavily fortified room with red lights, a bloody note, and a nuclear warhead device.
 Connections: Ends the game.
---------------------------------------------------------------------------------------------------------
 
 
