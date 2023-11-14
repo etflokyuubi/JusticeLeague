@@ -8,10 +8,10 @@ public class Game{
 	private Scanner input = new Scanner(System.in);
     Player player1;
 	public static void main(String[] args) {
-		File file = new File("TheOddMan.wav");
+		File file = new File("tiptaptwo.wav");
 		Game game = new Game();
 		// uncomment below for music to work.
-		game.music(file);
+		//game.music(file);
         game.start();
         game.play();
 	}
@@ -178,6 +178,7 @@ public class Game{
 	
 	// Serialization
     // Save object into a file.
+	// Thu
     public static void saveGame(Player obj, File file) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -187,7 +188,8 @@ public class Game{
     }
 
     // Deserialization
-    // Get object from a file.
+    // Get object from a file
+    // Thu
     public static Player loadGame(File file) throws IOException, ClassNotFoundException {
         Player result = null;
         try (FileInputStream fis = new FileInputStream(file);
@@ -197,10 +199,10 @@ public class Game{
         return result;
     }
 
-
+    // Play the background music
+    // ET
     public void music(File file) 
     {       
-    	
     	try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
