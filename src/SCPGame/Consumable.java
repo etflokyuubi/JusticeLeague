@@ -1,6 +1,7 @@
 package SCPGame;
 
 public class Consumable extends Item {
+	private static final long serialVersionUID = 1234L;
 	
 	//HP recovery value for consumable items
 	private int hpValue;
