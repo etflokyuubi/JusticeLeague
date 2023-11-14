@@ -1,13 +1,17 @@
 package SCPGame;
 
 import java.util.*;
+import javax.sound.sampled.*;
 import java.io.*;
 
 public class Game{
 	private Scanner input = new Scanner(System.in);
     Player player1;
 	public static void main(String[] args) {
+		File file = new File("TheOddMan.wav");
 		Game game = new Game();
+		// uncomment below for music to work.
+		//game.music(file);
         game.start();
         game.play();
 	}
@@ -193,6 +197,23 @@ public class Game{
             result = (Player) ois.readObject();
         }
         return result;
+    }
+
+
+    public void music(File file) 
+    {       
+    	
+    	try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
+            // If you want to stop the sound, then use clip.stop();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
