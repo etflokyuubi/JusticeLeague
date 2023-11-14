@@ -602,12 +602,12 @@ public class Player {
     public void equipItem(String itemID) {
     	// search inventory
     	Item item = findItem(itemID);
-    	Equippable equip = (Equippable)item;
     	
     	// if an item is found in the inventory, place it in the equipment array
     	if (inventory.isEmpty()) {
     		System.out.println("\nYou literally have nothing. Pick something up.\n");
     	} else if(item != null && item instanceof Equippable) {
+    		Equippable equip = (Equippable)item;
     		removeFromInventory(itemID);
     		equipped.add((Equippable) item);
     		if(equip.getHpValue() != 0){
@@ -620,7 +620,6 @@ public class Player {
     		System.out.println("\nThis item was not found in your inventory.\n");
     	}
     }
-    
     // Use a consumable item
     // Augustine, Thu
     public void useConsumable (String itemID) {
@@ -631,13 +630,15 @@ public class Player {
             if (playerHP == playerMaxHP) {
             	System.out.println("You are at full HP\nYou just waste 1 " + item.getItemName() + ".");
             }
-            else if (getPlayerHP() + ((Consumable) item).getHpValue() > playerMaxHP)
+            else if (getPlayerHP() + ((Consumable) item).getHpValue() > playerMaxHP) {
                 System.out.println("You healed " + (playerMaxHP - playerHP));
-            else
+            }
+            else {
                 System.out.println("You healed " + ((Consumable) item).getHpValue());
             setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
             System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
             System.out.println();
+            }
         } else if (!(item instanceof Consumable)) {
             System.out.println();
             System.out.println("This is not a consumable item.\n");
