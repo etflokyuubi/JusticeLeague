@@ -11,7 +11,7 @@ public class Game{
 		File file = new File("TheOddMan.wav");
 		Game game = new Game();
 		// uncomment below for music to work.
-		//game.music(file);
+		game.music(file);
         game.start();
         game.play();
 	}

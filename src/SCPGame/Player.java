@@ -638,7 +638,7 @@ public class Player implements Serializable{
                 System.out.println("You healed " + ((Consumable) item).getHpValue());
             }
             setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
-            System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
+            System.out.println("Current HP: " + playerHP + "/" + playerMaxHP);
             System.out.println();
         } else if (!(item instanceof Consumable)) {
             System.out.println();
@@ -753,7 +753,8 @@ public class Player implements Serializable{
     	System.out.println();
     	System.out.println("Here's how we're lookin:");
     	System.out.println("---------------------");
-    	System.out.println("HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
+    	System.out.println("Name: " + playerName);
+    	System.out.println("HP: " + playerHP + "/" + playerMaxHP);
     	System.out.println("---------------------");
     	System.out.println();
     }
