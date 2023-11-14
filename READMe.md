@@ -33,7 +33,7 @@ Welcome to the SCP Escape Game! In this text-based adventure, your goal is to na
 - Load: Load a previously saved game state from a file.
 - Exit: Quit the game without saving.
 
-## File Structure:
+# File Structure:
 1. Game.java: This contains the main logic of the game.
 2. Consumable.java: Represents consumable items in the game.
 3. Equippable.java: Represents equippable items in the game, extending the Item class.
@@ -50,7 +50,7 @@ Welcome to the SCP Escape Game! In this text-based adventure, your goal is to na
 14. Puzzle.txt:this file for defining puzzle attributes and solutions. 
 15. CombineRequired.txt: This file allows what item can be combine to to progress in the game.
 
-## Puzzles in SCP Escape Game:
+# Puzzles in SCP Escape Game:
 1. The Locker (LC-#00):
 Description: A locker with a combination lock and a note nearby. The note instructs that the combination is related to the designations of SCP documents on the current level.
 Solution: Examine SCP documents on the current level, find the SCP designation mentioned in the note, and use it as the combination.
@@ -96,7 +96,7 @@ Description: Use the SCP numbers from the last 3 encounters and add them up. The
 Solution: Add the SCP numbers from the last 3 encounters.
 Outcome: Deactivating the nuclear device and accessing Room 5 on the fourth floor.
 
-## SCP Escape Game Map and Room Descriptions
+# SCP Escape Game Map and Room Descriptions
 1. LC-CD-01 (Spawn Room):
 Description: Private cell in Zone 1.
 Connections: Leads to LC-#00.
