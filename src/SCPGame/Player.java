@@ -48,8 +48,8 @@ public class Player implements Serializable{
 
 	public void setSpawnRoom(Room spawnRoom) { this.spawnRoom = spawnRoom; }
 
-	public void setPlayerHP(int playerHP) {
-		if (playerHP > playerMaxHP) {
+	public void setPlayerHP(int hpValue) {
+		if (hpValue >= playerMaxHP) {
 			this.playerHP = playerMaxHP;
 			return;
 		}
@@ -57,7 +57,7 @@ public class Player implements Serializable{
 			this.playerHP = 0;
 			return;
 		}
-		this.playerHP = playerHP;
+		this.playerHP = hpValue;
 	}
 	
 	public void setPlayerMaxHP(int playerMaxHP) { this.playerMaxHP = playerMaxHP; }
@@ -636,10 +636,10 @@ public class Player implements Serializable{
             }
             else {
                 System.out.println("You healed " + ((Consumable) item).getHpValue());
+            }
             setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
             System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
             System.out.println();
-            }
         } else if (!(item instanceof Consumable)) {
             System.out.println();
             System.out.println("This is not a consumable item.\n");

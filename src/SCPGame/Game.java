@@ -150,7 +150,6 @@ public void play() {
 					saveGame(player1,file);
 					System.out.println("\nYou have sucessfully save the game.\n");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -159,12 +158,11 @@ public void play() {
 				try {
 					player1 = loadGame(file);
 					player1.setCurrentRoom(player1.getCurrentRoom());
-					System.out.println("\nYou have sucessfully load the game.\n");
+					System.out.println("\nYou have sucessfully load the game.");
+					player1.enterRoom();
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
