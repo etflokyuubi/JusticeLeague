@@ -144,14 +144,10 @@ public class Player implements Serializable{
     // Revive player to Spawn Room
     // Andrew
     public void revivePlayer() {
-        if (playerHP <= 0) {
             System.out.println("You have been revived at the spawn room.");
             setPlayerHP(100);  // Reset player's HP to the maximum value
             setCurrentRoom(this.spawnRoom);  // Move the player to the spawn room
             displayLocation();  // Display the information about the spawn room
-        } else {
-            System.out.println("You are not dead. No need to revive.");
-        }
     }
     
     // Action happens after player enter a room
@@ -471,7 +467,7 @@ public class Player implements Serializable{
         if (currentRoom.getPuzzle()!= null) {
             System.out.println("Hey you have a puzzle to solve!");
             int numAttempts = currentRoom.getPuzzle().getAttempts();
-            while (numAttempts > 0 ) {
+            while (numAttempts > 0) {
                 System.out.println(currentRoom.getPuzzle().getQuestion());
                 String answer = input.nextLine();
                 if (answer.equalsIgnoreCase("hint")) {
@@ -638,7 +634,7 @@ public class Player implements Serializable{
                 System.out.println("You healed " + ((Consumable) item).getHpValue());
             }
             setPlayerHP(getPlayerHP() + ((Consumable) item).getHpValue());           	
-            System.out.println("Current HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
+            System.out.println("Current HP: " + playerHP + "/" + playerMaxHP);
             System.out.println();
         } else if (!(item instanceof Consumable)) {
             System.out.println();
@@ -753,7 +749,8 @@ public class Player implements Serializable{
     	System.out.println();
     	System.out.println("Here's how we're lookin:");
     	System.out.println("---------------------");
-    	System.out.println("HP: " + getPlayerHP() + "/" + getPlayerMaxHP());
+    	System.out.println("Name: " + playerName);
+    	System.out.println("HP: " + playerHP + "/" + playerMaxHP);
     	System.out.println("---------------------");
     	System.out.println();
     }

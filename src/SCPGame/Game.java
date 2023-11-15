@@ -1,13 +1,17 @@
 package SCPGame;
 
 import java.util.*;
+import javax.sound.sampled.*;
 import java.io.*;
 
 public class Game{
 	private Scanner input = new Scanner(System.in);
     Player player1;
 	public static void main(String[] args) {
+		File file = new File("tiptaptwo.wav");
 		Game game = new Game();
+		// uncomment below for music to work.
+		//game.music(file);
         game.start();
         game.play();
 	}
@@ -179,6 +183,7 @@ public void play() {
 	
 	// Serialization
     // Save object into a file.
+	// Thu
     public static void saveGame(Player obj, File file) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -187,8 +192,12 @@ public void play() {
         }
     }
 
-    
+
     // Get object from a file.
+    // Deserialization
+    // Get object from a file
+    // Thu
+
     public static Player loadGame(File file) throws IOException, ClassNotFoundException {
         Player result = null;
         try (FileInputStream fis = new FileInputStream(file);
@@ -196,6 +205,24 @@ public void play() {
             result = (Player) ois.readObject();
         }
         return result;
+    }
+
+    // Play the background music
+    // ET
+    public void music(File file) 
+    {       
+    	try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            
+            // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
+            // If you want to stop the sound, then use clip.stop();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
