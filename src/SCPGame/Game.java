@@ -135,6 +135,7 @@ public void play() {
 				if(playerInput.length() > 4) {
 					String itemId = playerInput.substring(4, playerInput.length());
 					player1.useItem(itemId);
+					
 				}
 				else
 				{
