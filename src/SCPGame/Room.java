@@ -80,7 +80,22 @@ public class Room implements Serializable {
 	public void addItem(Item i) { this.roomItems.add(i); }
 	
 	public void setKeyID(String keyID) { this.keyID = keyID; }
-
+	
+	 public boolean areAllPuzzlesSolved() {
+	        for (Puzzle puzzle : puzzles) {
+	            if (!puzzle.isSolved()) {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+	 
+	 // Automatically pick up items when all puzzles are solved
+	    public void autoPickup(Player player) {
+	        if (areAllPuzzlesSolved()) {
+	            player.autoPickup(this);
+	        }
+	    }
 	@Override
 	public String toString() {
 		return "Room [roomID=" + roomID + ", roomName=" + roomName + ", roomDescription=" + roomDescription

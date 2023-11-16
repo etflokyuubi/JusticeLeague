@@ -9,15 +9,16 @@ public class Item implements Serializable, Comparable <Item>{
 	private String itemName;
 	private String itemType;
 	private String itemDescription;
-	
+	private boolean autoPickup;
 	//Constructor
-	public Item(int initRoomID, String itemID, String itemName, String itemType, String itemDescription) {
+	public Item(int initRoomID, String itemID, String itemName, String itemType, String itemDescription,boolean autoPickup) {
 		super();
 		this.initRoomID = initRoomID;
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemType = itemType;
 		this.itemDescription = itemDescription;
+		this.autoPickup = autoPickup;
 	}
 
 	//Getter
@@ -30,6 +31,10 @@ public class Item implements Serializable, Comparable <Item>{
 	public String getItemType() { return itemType; }
 
 	public String getItemDescription() { return itemDescription; }
+	
+	public boolean isAutoPickup() {
+        return autoPickup;
+    }
 	
 	 @Override
 	    public int compareTo(Item o) {
