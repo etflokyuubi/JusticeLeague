@@ -53,7 +53,7 @@ public class Player implements Serializable{
 			this.playerHP = playerMaxHP;
 			return;
 		}
-		if (playerHP <= 0) {
+		if (hpValue <= 0) {
 			this.playerHP = 0;
 			return;
 		}
@@ -731,6 +731,25 @@ public class Player implements Serializable{
     		useConsumable(itemID);
     }
     
+    //Auto-Pick item
+    
+//    public void autoPickup(Room room) {
+//        ArrayList<Item> roomItems = room.getItems();
+//
+//        // Iterate through the items in the room
+//        for (Item item : roomItems) {
+//            // Check if the item is automatically pick-uppable (based on your conditions)
+//            if (item.isAutoPickup()) {
+//                // Add the item to the player's inventory
+//                inventory.add(item);
+//                System.out.println("You automatically picked up: " + item.getItemName());
+//            }
+//        }
+//
+//        // Clear the room's items after auto-pickup
+//        room.clearItems();
+//    }
+//    
     // Use a key to unlock a room
     // Thu
     public void useKey(Item key) {

@@ -22,7 +22,12 @@ public class Game{
         player1 = new Player(playerName,gameMap);
     }
 	
-	public void play() {
+
+	
+	 
+	
+public void play() {
+
 		System.out.println("Hello " + player1.getPlayerName() + "! ");
 		player1.enterRoom();
 		System.out.println("Which direction do you want to go? (N/E/S/W) Or type (Exit) to quit the game");
@@ -130,6 +135,8 @@ public class Game{
 				if(playerInput.length() > 4) {
 					String itemId = playerInput.substring(4, playerInput.length());
 					player1.useItem(itemId);
+					
+					
 				}
 				else
 				{
@@ -187,9 +194,12 @@ public class Game{
         }
     }
 
+
+    // Get object from a file.
     // Deserialization
     // Get object from a file
     // Thu
+
     public static Player loadGame(File file) throws IOException, ClassNotFoundException {
         Player result = null;
         try (FileInputStream fis = new FileInputStream(file);
@@ -209,6 +219,7 @@ public class Game{
             clip.open(audioInputStream);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            
             // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
             // If you want to stop the sound, then use clip.stop();
         } catch (Exception ex) {
@@ -216,5 +227,6 @@ public class Game{
         }
     }
 }
+
 
 

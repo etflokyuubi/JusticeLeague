@@ -80,7 +80,7 @@ public class Room implements Serializable {
 	public void addItem(Item i) { this.roomItems.add(i); }
 	
 	public void setKeyID(String keyID) { this.keyID = keyID; }
-
+	
 	@Override
 	public String toString() {
 		return "Room [roomID=" + roomID + ", roomName=" + roomName + ", roomDescription=" + roomDescription

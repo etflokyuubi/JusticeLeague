@@ -9,7 +9,6 @@ public class Item implements Serializable, Comparable <Item>{
 	private String itemName;
 	private String itemType;
 	private String itemDescription;
-	
 	//Constructor
 	public Item(int initRoomID, String itemID, String itemName, String itemType, String itemDescription) {
 		super();
