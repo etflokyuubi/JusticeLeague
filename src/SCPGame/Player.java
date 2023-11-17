@@ -416,6 +416,9 @@ public class Player implements Serializable{
     	if(currentRoom.getRoomItems().isEmpty()) {
     		System.out.println("\nThere's nothing here to pick up.");
     	}
+    	else if (currentRoom.getPuzzle()!=null) {
+    		System.out.println("You have to solve the puzzle before picking up items.");
+    	}
     	else {
     		boolean itemfound = false;
     		for(Item item : currentRoom.getRoomItems()) {
@@ -476,8 +479,9 @@ public class Player implements Serializable{
                 	continue;
                 }
                 if (answer.equalsIgnoreCase(currentRoom.getPuzzle().getAnswer())) {
-                    System.out.println("\nYou solved the puzzle!\n");
+                    System.out.println(currentRoom.getPuzzle().getSolvedMessage());
                     currentRoom.setPuzzle(null);
+                    autoPickup();
                     break;
                 }
                 else {
@@ -731,25 +735,23 @@ public class Player implements Serializable{
     		useConsumable(itemID);
     }
     
-    //Auto-Pick item
+    //Auto-Pickup items
+    public void autoPickup() {
+    	if (currentRoom.getRoomItems().isEmpty())
+    		return;
+
+    	System.out.println("\nYou automatically picked up: ");
+        // Iterate through the items in the room
+        for (Item item : currentRoom.getRoomItems()) {
+            // Add the item to the player's inventory
+        	inventory.add(item);
+        	System.out.println(item.getItemID() + ": " + item.getItemName());
+        }
+        currentRoom.getRoomItems().clear();
+    }
+    	
+        
     
-//    public void autoPickup(Room room) {
-//        ArrayList<Item> roomItems = room.getItems();
-//
-//        // Iterate through the items in the room
-//        for (Item item : roomItems) {
-//            // Check if the item is automatically pick-uppable (based on your conditions)
-//            if (item.isAutoPickup()) {
-//                // Add the item to the player's inventory
-//                inventory.add(item);
-//                System.out.println("You automatically picked up: " + item.getItemName());
-//            }
-//        }
-//
-//        // Clear the room's items after auto-pickup
-//        room.clearItems();
-//    }
-//    
     // Use a key to unlock a room
     // Thu
     public void useKey(Item key) {
