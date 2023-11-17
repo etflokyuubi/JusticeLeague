@@ -481,7 +481,7 @@ public class Player implements Serializable{
                     break;
                 }
                 else {
-                	System.out.println("\nYou answered incorrectly! You have " + numAttempts + " left.\n");
+                	System.out.println("\nYou answered incorrectly! You have " + numAttempts + " attempt(s) left.\n");
                     numAttempts--;
                 }
             }
