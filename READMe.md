@@ -32,9 +32,13 @@ Welcome to the SCP Escape Game! In this text-based adventure, your goal is to na
 - Save: Save the current game progress to a file.
 - Load: Load a previously saved game state from a file.
 - Exit: Quit the game without saving.
+-Other Commands:
+-Gallery:Displays the pictures of resently defeated monsters.
 
 # File Structure:
 1. Game.java: This contains the main logic of the game.
+1.1 GameView.java: This contains the visuals of the main logic of the game.
+1.2 GameController.java: This contains the inputs user use for the game logic.
 2. Consumable.java: Represents consumable items in the game.
 3. Equippable.java: Represents equippable items in the game, extending the Item class.
 4. Item.java: Represents a generic item in the game.
